@@ -7,12 +7,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Accueil</a>
+                            <a class="nav-link" aria-current="page" href="{{ path('main_home') }}"title="Home">Accueil</a>
                         </li>
                         {% if app.user %}
                             <li class="nav-item"><a class="nav-link" href="#" title="Créer une nouvelle sortie">Créer une Sortie</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Test">Mon Profil</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Logout">Logout ({{ app.user.pseudo}})</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('profil_profil') }}" title="Mon profil">Mon Profil</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}" title="Logout">Logout ({{ app.user.pseudo}})</a></li>
 
                             {% if is_granted("ROLE_ADMIN") %}
                                 <li class="nav-item"><a class="nav-link" href="#" title="Admin dashboard">admin</a></li>
@@ -20,8 +20,8 @@
                             {% endif %}
 
                         {% else %}
-                            <li class="nav-item"><a class="nav-link" href="#" title="Login">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" title="Create account">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}" title="Login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}" title="Create account">Register</a></li>
 
                         {% endif %}
 
