@@ -2,19 +2,26 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\Sortie;
 
 
-
+use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLoader;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Sodium\add;
 
 class CreerUneSortieType extends AbstractType
 {
@@ -45,9 +52,21 @@ class CreerUneSortieType extends AbstractType
             ])
 
 
-            ->add('infosSortie',textType::class,[
+            ->add('infosSortie',TextType::class,[
                 'label'=>'Description et infos'
             ] )
+            ->add('ville', EntityType::class,[
+                'class'=>Ville::class,
+                'label'=>'Ville :'
+                ])
+
+            ->add('lieu', EntityUserProvider::class,[
+                'class' => Lieu::class
+
+
+
+            ])
+
 
         ;
     }
