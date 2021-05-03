@@ -1,14 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Créer une sortie </h1>
-    <div>
-        {{ form_start(sortieForm) }}
-        {{ form_widget(sortieForm) }}
-        <button>Enregistrer </button>
-        {{ form_end(sortieForm) }}
-    </div>
-
+    <section class="container">
+        <div class="row">
+            <h1>Créer une sortie </h1>
+            <div class="col-12 col-lg-2"></div>
+            <div class="col-12 col-lg-8">
+                {{ form_start(sortieForm) }}
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        {{ form_row(sortieForm.nom) }}
+                        {{ form_row(sortieForm.dateHeureDebut) }}
+                        {{ form_row(sortieForm.dateLimiteInscription) }}
+                        {{ form_row(sortieForm.nbInsriptionsMax) }}
+                        {{ form_row(sortieForm.duree) }}
+                        {{ form_row(sortieForm.infosSortie) }}
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        {{ form_row(sortieForm.ville) }}
+                        {{ form_row(sortieForm.lieu) }}
+                        <label>Rue :</label><br>
+                        <label>Code postal :</label><br>
+                        <label>Latitude :</label><br>
+                        <label>Longitude :</label><br>
+                    </div>
+                </div>
+                <button class="btn btn-success">Enregistrer </button>
+                {{ form_end(sortieForm) }}
+            </div>
+            <div class="col-12 col-lg-2"></div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block title %}

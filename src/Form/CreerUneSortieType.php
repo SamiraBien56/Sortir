@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use function Sodium\add;
@@ -34,8 +35,9 @@ class CreerUneSortieType extends AbstractType
             ])
             ->add('dateHeureDebut', DateTimeType::class,[
                 'label'=>'Date et heure de la sortie:',
+                'input'=>'datetime',
                 'html5' => true,
-                'widget' => 'single_text',
+                'widget' => 'choice'
             ])
             ->add('dateLimiteInscription', DateType::class, [
                 'label' => "Date limite d'inscription",
@@ -46,25 +48,25 @@ class CreerUneSortieType extends AbstractType
                 'label'=>'Nombre de places'
 
             ])
-            ->add('duree', IntegerType::class, [
+            ->add('duree', TimeType::class, [
 
                 'label'=>'Durée'
             ])
 
 
-            ->add('infosSortie',TextType::class,[
+            ->add('infosSortie', TextType::class,[
                 'label'=>'Description et infos'
             ] )
             ->add('ville', EntityType::class,[
                 'class'=>Ville::class,
+                'choice_label'=>'nom',
                 'label'=>'Ville :'
                 ])
 
-            ->add('lieu', EntityUserProvider::class,[
-                'class' => Lieu::class
-
-
-
+            ->add('lieu', EntityType::class,[
+                'class'=>Lieu::class,
+                'choice_label'=>'nom',
+                'label'=>'Lieu :'
             ])
 
 

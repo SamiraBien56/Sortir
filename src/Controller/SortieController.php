@@ -19,8 +19,8 @@ class SortieController extends AbstractController
     public function createSortie(request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
         $sortie= new Sortie();
-        $etat= $etatRepository-> find(1);
-        $sortie-> setEtat($etat);
+        $etat = $etatRepository->find(1);
+        $sortie->setEtat($etat);
 
         $sortieForm = $this ->createForm(CreerUneSortieType::class,$sortie);
         $sortieForm-> handleRequest($request);
