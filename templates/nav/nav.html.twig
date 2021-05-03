@@ -5,7 +5,7 @@
 
         {% if app.user %}
             <li><a href="#" title="Créer une nouvelle sortie">Créer une Sortie</a></li>
-            <li><a href="#" title="Logout">Logout ({{ app.user.prenom}})</a></li>
+            <li><a href="#" title="Logout">Logout ({{ app.user.firstname}})</a></li>
 
             {% if is_granted("ROLE_ADMIN") %}
                 <li><a href="#" title="Admin dashboard">admin</a></li>
@@ -13,8 +13,8 @@
             {% endif %}
 
         {% else %}
-            <li><a href="{{ path('app_login')}}" title="Login">Login</a></li>
-            <li><a href="{{ path('app_register') }}" title="Create account">Register</a></li>
+            <li><a href="#" title="Login">Login</a></li>
+            <li><a href="#" title="Create account">Register</a></li>
 
         {% endif %}
     </ul>
