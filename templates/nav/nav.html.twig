@@ -1,21 +1,31 @@
-<nav>
-    <ul>
-        <li><a href="#" title="Home">Acceuil</a></li>
-        <li><a href="#" title="Test">Mon Profil</a></li>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Sortir</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Accueil</a>
+                        </li>
+                        {% if app.user %}
+                            <li class="nav-item"><a class="nav-link" href="#" title="Créer une nouvelle sortie">Créer une Sortie</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" title="Test">Mon Profil</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" title="Logout">Logout ({{ app.user.pseudo}})</a></li>
 
-        {% if app.user %}
-            <li><a href="#" title="Créer une nouvelle sortie">Créer une Sortie</a></li>
-            <li><a href="#" title="Logout">Logout ({{ app.user.pseudo}})</a></li>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <li class="nav-item"><a class="nav-link" href="#" title="Admin dashboard">admin</a></li>
 
-            {% if is_granted("ROLE_ADMIN") %}
-                <li><a href="#" title="Admin dashboard">admin</a></li>
+                            {% endif %}
 
-            {% endif %}
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="#" title="Login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" title="Create account">Register</a></li>
 
-        {% else %}
-            <li><a href="#" title="Login">Login</a></li>
-            <li><a href="#" title="Create account">Register</a></li>
+                        {% endif %}
 
-        {% endif %}
-    </ul>
-</nav>
+                    </ul>
+                </div>
+            </div>
+        </nav>
