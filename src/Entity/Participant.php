@@ -66,6 +66,11 @@ class Participant implements UserInterface
      */
     private $actif;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="participant", cascade={"persist", "remove"})
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -213,6 +218,23 @@ class Participant implements UserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(Image $image): self
+    {
+        // set the owning side of the relation if necessary
+        if ($image->getParticipant() !== $this) {
+            $image->setParticipant($this);
+        }
+
+        $this->image = $image;
 
         return $this;
     }
