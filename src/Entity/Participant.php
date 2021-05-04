@@ -71,6 +71,11 @@ class Participant implements UserInterface
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     */
+    private $campus;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -235,6 +240,18 @@ class Participant implements UserInterface
         }
 
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
