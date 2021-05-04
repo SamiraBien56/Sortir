@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{sortie.nom }} {% endblock %}
+
+{% block body %}
+<div class="grix xs4 container">
+    {% for message in app.flashes('message') %}
+        <div class="col-xs4">
+            <div class="p-3 my-2 rounded-2 success">{{message}}</div>
+        </div>
+    {% endfor %}
+    <div class="col-xs4">
+        <h1>Sortie: {{ sortie.nom }} </h1>
+    </div>
+    <label class="col-xs1">Nom de la sortie :</label>
+    <input class="col-xs3" value="{{sortie.nom}}">
+    <label class="col-xs1">Date et heure de la sortie :</label>
+    <input class="col-xs3" value="{{ sortie.dateHeureDebut}}">
+    <label class="col-xs1">Date limite d'inscription :</label>
+    <input class="col-xs3" value="{{ sortie.dateLimiteInscription}}">
+    <label class="col-xs1">Nombre de place :</label>
+    <input class="col-xs3" value="{{ sortie.nbInsriptionsMax}}">
+    <label class="col-xs1">Durée :</label>
+    <input class="col-xs3" value="{{ sortie.duree}} minutes">
+    <label class="col-xs1">Description et infos :</label>
+    <input class="col-xs3" value="{{ sortie.infosSortie}}">
+    <div>
+        <label class="col-xs1">Campus :</label>
+        <input class="col-xs3" value="{{ "#" }}">
+        <label class="col-xs1">Lieu :</label>
+        <input class="col-xs3" value="{{ "#"}}">
+        <label class="col-xs1">Rue :</label>
+        <input class="col-xs3" value="{{ "#"}}">
+        <label class="col-xs1">Campus :</label>
+        <input class="col-xs3" value="{{ "#"}}">
+    </div>
+    <div>
+        <label class="col-xs1">Liste des participant inscrits:</label>
+        {% if sortie. %}
+
+
+
+    </div>
+
+
+
+{% endblock %}
