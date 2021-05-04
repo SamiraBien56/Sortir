@@ -21,6 +21,7 @@ class MainController extends AbstractController
      */
     public function home(SortieManager $sortieManager, Request $request, ParticipantRepository $participantRepository)
     {
+        $inscriptions=null;
         $filterForm = $this->createForm(FilterListType::class);
         $filterForm->handleRequest($request);
         if ($filterForm->isSubmitted() && $filterForm->isValid()) {
@@ -28,6 +29,7 @@ class MainController extends AbstractController
             $listAllSorties = $sortieManager->getSortiesByFilter($req["campus"], $req["dateMin"], $req["dateMax"]);
         } else {
             if($this->getUser() != null) {
+                $inscriptions = $this->getUser()->getInscriptions();
                 $user = $participantRepository->find($this->getUser()->getId());
                 $listAllSorties = $sortieManager->getSortiesByCampus($user->getCampus()->getId());
             } else {
@@ -36,7 +38,8 @@ class MainController extends AbstractController
         }
         return $this->render('main/home.html.twig', [
             'listAllSorties' => $listAllSorties,
-            'filterForm'=> $filterForm->createView()
+            'filterForm'=> $filterForm->createView(),
+            'inscription'=>$inscriptions
         ]);
     }
 
