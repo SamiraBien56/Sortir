@@ -25,10 +25,30 @@ class SortieManager
     public function getSortiesByCampus($idCampus)
     {
         $sortiesByCampus = $this->entityManager->createQuery(
-            'SELECT sortie App\Entity\Sortie sortie
-            WHERE sortie.campus LIKE :idCampus'
+            'SELECT sortie FROM App\Entity\Sortie sortie
+            LEFT JOIN sortie.campus campus
+            WHERE campus.id LIKE :idCampus'
         )
-        ->setParameter('idCampus', $idCampus);
+            ->setParameter('idCampus', $idCampus);
+        $allSorties = $sortiesByCampus->getResult();
+        return $allSorties;
+    }
+
+    public function getSortiesByFilter($idCampus, $dateMin, $dateMax)
+    {
+        $dateM = new \DateTime(implode('-', $dateMin));
+        $dateMa = new \DateTime(implode('-', $dateMax));
+
+        $sortiesByCampus = $this->entityManager->createQuery(
+            'SELECT sortie FROM App\Entity\Sortie sortie
+            LEFT JOIN sortie.campus campus
+            WHERE campus.id LIKE :idCampus AND sortie.dateHeureDebut BETWEEN :dateMin  AND :dateMax'
+        )
+            ->setParameter('idCampus', $idCampus)
+            ->setParameter('dateMin', $dateM->format('Y-d-m'))
+            ->setParameter('dateMax', $dateMa->format('Y-d-m'))
+        ;
+
         $allSorties = $sortiesByCampus->getResult();
         return $allSorties;
     }
