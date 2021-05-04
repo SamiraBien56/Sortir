@@ -69,7 +69,17 @@ class Participant implements UserInterface
     private $actif;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
+     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="participant", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     */
+    private $campus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
      */
     private $sorties;
 
@@ -229,6 +239,35 @@ class Participant implements UserInterface
         return $this;
     }
 
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(Image $image): self
+    {
+        // set the owning side of the relation if necessary
+        if ($image->getParticipant() !== $this) {
+            $image->setParticipant($this);
+        }
+
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Sortie[]
      */
@@ -241,6 +280,7 @@ class Participant implements UserInterface
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties[] = $sorty;
+            $sorty->setOrganisateur($this);
         }
 
         return $this;
@@ -248,7 +288,12 @@ class Participant implements UserInterface
 
     public function removeSorty(Sortie $sorty): self
     {
-        $this->sorties->removeElement($sorty);
+        if ($this->sorties->removeElement($sorty)) {
+            // set the owning side to null (unless already changed)
+            if ($sorty->getOrganisateur() === $this) {
+                $sorty->setOrganisateur(null);
+            }
+        }
 
         return $this;
     }

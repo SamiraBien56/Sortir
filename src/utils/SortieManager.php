@@ -9,7 +9,6 @@ class SortieManager
 {
     private $sortieRepository;
 
-
     public function __construct(SortieRepository $sortieRepository,
                                 EntityManagerInterface $entityManager)
     {
@@ -23,11 +22,21 @@ class SortieManager
         return $allSorties;
     }
 
+    public function getSortiesByCampus($idCampus)
+    {
+        $sortiesByCampus = $this->entityManager->createQuery(
+            'SELECT sortie App\Entity\Sortie sortie
+            WHERE sortie.campus LIKE :idCampus'
+        )
+        ->setParameter('idCampus', $idCampus);
+        $allSorties = $sortiesByCampus->getResult();
+        return $allSorties;
+    }
 
     public function AllParticipants($idSortie)
     {
         $sortie = $this->sortieRepository->find($idSortie);
         return $sortie;
     }
-}
 
+}

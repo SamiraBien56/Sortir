@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\CreerUneSortieType;
 use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\utils\SortieManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,11 +20,15 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/create", name = "sortie_create")
      */
-    public function createSortie(request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
+    public function createSortie(request $request, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
+        $user = $this->getUser()->getId();
+        $organisateur = $participantRepository->find($user);
         $sortie= new Sortie();
         $etat = $etatRepository->find(1);
         $sortie->setEtat($etat);
+        $sortie->setOrganisateur($organisateur);
+        $sortie->setCampus($organisateur->getCampus());
 
         $sortieForm = $this ->createForm(CreerUneSortieType::class,$sortie);
         $sortieForm-> handleRequest($request);
@@ -40,6 +45,7 @@ class SortieController extends AbstractController
             'sortieForm' => $sortieForm -> createView(),
         ]);
     }
+
     /**
      * @Route("/sortie/afficher/{id}", name = "sortie_afficher")
      */
@@ -59,12 +65,4 @@ class SortieController extends AbstractController
 
     }
 
-    /**
-     * @Route ("/sortie/sinscrire", name = "sortie_sinscrire")
-     */
-
-    public function sinscrire(Sortie $sortie, EntityManagerInterface $entityManager){
-
-
-    }
 }

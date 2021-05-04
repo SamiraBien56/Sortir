@@ -13,18 +13,24 @@
         <div class="col-xs4">
             <h1>Données personnelles de {{ app.user.prenom }} {{ app.user.nom }}</h1>
         </div>
+        <div>
         <label class="col-xs1">Nom :</label>
-        <input class="col-xs3" value="{{ app.user.nom }}">
+        <span class="col-xs3" >{{ app.user.nom }}</span>
+        </div>
+        <div>
         <label class="col-xs1">Prénom :</label>
-        <input class="col-xs3" value="{{ app.user.prenom }}">
+        <span class="col-xs3" >{{ app.user.prenom }}</span>
+        </div>
         <div>
         <label class="col-xs1">Email :</label>
-        <input class="col-xs3" value="{{ app.user.mail }}">
+        <span class="col-xs3" >{{ app.user.mail }}</span>
+        </div>
+        <div>
         <label class="col-xs1">Numéro :</label>
-        <input class="col-xs3" value="{{ app.user.telephone }}">
+        <span class="col-xs3" >{{ app.user.telephone }}</span>
         </div>
         <div class="col-xs4">
-            <a href="#" class="btn btn-success">Modifier le profil</a>
+            <a href="{{ path('profil_editProfil') }}" class="btn btn-success">Modifier le profil</a>
             <a href="#" class="btn btn-danger">Supprimer le profil</a>
         </div>
 
