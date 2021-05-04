@@ -32,4 +32,11 @@ class SortieManager
         $allSorties = $sortiesByCampus->getResult();
         return $allSorties;
     }
+
+    public function AllParticipants($idSortie)
+    {
+        $sortie = $this->sortieRepository->find($idSortie);
+        return $sortie;
+    }
+
 }
