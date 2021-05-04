@@ -9,6 +9,7 @@ class SortieManager
 {
     private $sortieRepository;
 
+
     public function __construct(SortieRepository $sortieRepository,
                                 EntityManagerInterface $entityManager)
     {
@@ -21,4 +22,12 @@ class SortieManager
         $allSorties = $this->sortieRepository->findAll();
         return $allSorties;
     }
+
+
+    public function AllParticipants($idSortie)
+    {
+        $sortie = $this->sortieRepository->find($idSortie);
+        return $sortie;
+    }
 }
+
