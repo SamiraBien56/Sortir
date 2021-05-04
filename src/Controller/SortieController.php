@@ -7,6 +7,8 @@ use App\Entity\Sortie;
 use App\Form\CreerUneSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
+use App\utils\SortieManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,4 +45,24 @@ class SortieController extends AbstractController
             'sortieForm' => $sortieForm -> createView(),
         ]);
     }
+
+    /**
+     * @Route("/sortie/afficher/{id}", name = "sortie_afficher")
+     */
+    public function details(int $id, SortieRepository $sortieRepository, SortieManager $sortieManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $user = $this->getUser();
+        $this->getUser();
+
+        $listAllParticipants = $sortieManager->AllParticipants($id);
+        //dd($listAllParticipants);
+        return $this->render('sortie/afficher.html.twig', [
+            "sortie"=> $sortie,
+            "user"=>$user,
+            'listAllParticipants' => $listAllParticipants
+        ]);
+
+    }
+
 }

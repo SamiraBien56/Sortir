@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{sortie.nom }} {% endblock %}
+
+{% block body %}
+<div class="grix xs4 container">
+    {% for message in app.flashes('message') %}
+        <div class="col-xs4">
+            <div class="p-3 my-2 rounded-2 success">{{message}}</div>
+        </div>
+    {% endfor %}
+    <div class="col-xs4">
+        <h1>Sortie: {{ sortie.nom }} </h1>
+    </div>
+    <div>
+        <div> Nom de la sortie : {{ sortie.nom }}</div>
+        <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date("Y-m-d") }}</div>
+        <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date("Y-m-d")  }}</div>
+        <div> Nombre de places : {{ sortie.nbInsriptionsMax }}</div>
+        <div> Durée : {{ sortie.duree|date("Y-m-d")  }}</div>
+        <div> Description et infos : {{ sortie.infosSortie }}</div>
+    </div>
+    <div>
+        <div> Campus : {{"#"}}</div>
+        <div> Lieu : {{ "#" }}</div>
+        <div> Rue : {{ "#" }}</div>
+        <div> Code Postal : {{ "#" }}</div>
+        <div> Latitude: {{ "#" }}</div>
+        <div> Longitude: {{ "#" }}</div>
+
+
+    </div>
+    <div>
+        <label class="col-xs1">Liste des participant inscrits:</label>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Pseudo</th>
+                <th scope="col">Nom</th>
+            </tr>
+            </thead>
+        <tbody>
+ {% if listAllParticipants.participants != null %}
+        {% for participant in listAllParticipants.participants%}
+            <tr>
+                <td>{{ participant.pseudo}}</td>
+                <td>{{ participant.nom}}</td>
+
+            </tr>
+        {% endfor %}
+{% endif %}
+        </tbody>
+        </table>
+
+
+
+    </div>
+
+
+
+{% endblock %}
