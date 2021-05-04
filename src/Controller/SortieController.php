@@ -56,7 +56,7 @@ class SortieController extends AbstractController
         $this->getUser();
 
         $listAllParticipants = $sortieManager->AllParticipants($id);
-
+        //dd($listAllParticipants);
         return $this->render('sortie/afficher.html.twig', [
             "sortie"=> $sortie,
             "user"=>$user,

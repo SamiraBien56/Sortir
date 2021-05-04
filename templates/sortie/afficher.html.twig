@@ -40,7 +40,7 @@
             </tr>
             </thead>
         <tbody>
-        {% if listAllParticipants.participants != null %}
+ {% if listAllParticipants.participants != null %}
         {% for participant in listAllParticipants.participants%}
             <tr>
                 <td>{{ participant.pseudo}}</td>
@@ -48,7 +48,7 @@
 
             </tr>
         {% endfor %}
-        {% endif %}
+{% endif %}
         </tbody>
         </table>
 
