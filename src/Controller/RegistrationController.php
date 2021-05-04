@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Participant;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
@@ -28,6 +29,23 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+
+            $images = $form->get('image')->getData();
+            foreach ($images as $image){
+                // on génére un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$images->guessExtension();
+
+                //on copie le fichier dans img
+                $image->move(
+                  $this->getParameter('images_directory'),
+                    $fichier
+                );
+                // on stock en bdd
+                $img = new Image();
+                $img->setName($fichier);
+                $user->setImage($img);
+            }
+
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
