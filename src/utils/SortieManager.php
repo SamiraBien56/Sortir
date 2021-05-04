@@ -21,4 +21,15 @@ class SortieManager
         $allSorties = $this->sortieRepository->findAll();
         return $allSorties;
     }
+
+    public function getSortiesByCampus($idCampus)
+    {
+        $sortiesByCampus = $this->entityManager->createQuery(
+            'SELECT sortie App\Entity\Sortie sortie
+            WHERE sortie.campus LIKE :idCampus'
+        )
+        ->setParameter('idCampus', $idCampus);
+        $allSorties = $sortiesByCampus->getResult();
+        return $allSorties;
+    }
 }

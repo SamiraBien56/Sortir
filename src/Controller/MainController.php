@@ -18,7 +18,11 @@ class MainController extends AbstractController
      */
     public function home(SortieManager $sortieManager)
     {
-        $listAllSorties = $sortieManager->getAllSorties();
+        if($this->getUser() != null) {
+            $listAllSorties = $sortieManager->getAllSorties();
+        } else {
+            $listAllSorties = $sortieManager->getAllSorties();
+        }
         return $this->render('main/home.html.twig', [
             'listAllSorties' => $listAllSorties
         ]);
