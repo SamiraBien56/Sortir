@@ -76,7 +76,7 @@
                                     {% for inscription in inscriptions %}
                                     {% if  inscription.id == sortie.id and app.user.pseudo != sortie.organisateur.pseudo %}
                                         {% set ok=1 %}
-                                        <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>Se désister</div>
+                                        <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>-<a href="{{ path('sortie_sedesister',{'id': sortie.id})}}" title="sedesister ">Se désister</div>
                                     {% endif %}
                                     {% endfor %}
                                     {% if ok==0 %}
