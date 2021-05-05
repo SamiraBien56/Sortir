@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Entity\Participant;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
