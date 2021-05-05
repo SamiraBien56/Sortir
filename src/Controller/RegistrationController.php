@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Entity\Participant;
 use App\Form\RegistrationFormType;
 use App\Security\AppAuthenticator;
@@ -31,9 +31,16 @@ class RegistrationController extends AbstractController
             // encode the plain password
 
             $images = $form->get('image')->getData();
-            foreach ($images as $image){
+            $fichier = md5(uniqid()).'.'.$images->guessExtension();
+            $user->setImage($fichier);
+
+            $images->move(
+                $this->getParameter('images_directory'),
+                $fichier);
+            /*foreach ($images as $image){
                 // on génére un nouveau nom de fichier
                 $fichier = md5(uniqid()).'.'.$image->guessExtension();
+                //dd($fichier);
 
                 //on copie le fichier dans img
                 $image->move(
@@ -41,10 +48,9 @@ class RegistrationController extends AbstractController
                     $fichier
                 );
                 // on stock en bdd
-                $img = new Image();
-                $img->setName($fichier);
+                $img = $this->getUser()->setImage('coucou');
                 $user->setImage($img);
-            }
+            } */
 
             $user->setPassword(
                 $passwordEncoder->encodePassword(

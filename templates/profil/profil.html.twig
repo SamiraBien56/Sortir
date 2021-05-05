@@ -13,7 +13,7 @@
         <div class="col-xs4">
             <h1>Données personnelles de {{ app.user.prenom }} {{ app.user.nom }}</h1>
         </div>
-        {{ app.user.image }}
+        <img src="{{ asset(app.user.image)}}">
         <div>
         <label class="col-xs1">Nom :</label>
         <span class="col-xs3" >{{ app.user.nom }}</span>

@@ -68,10 +68,6 @@ class Participant implements UserInterface
      */
     private $actif;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="participant", cascade={"persist", "remove"})
-     */
-    private $image;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
@@ -87,6 +83,11 @@ class Participant implements UserInterface
      * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants")
      */
     private $inscriptions;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
 
     public function __construct()
     {
@@ -245,22 +246,6 @@ class Participant implements UserInterface
         return $this;
     }
 
-    public function getImage(): ?Image
-    {
-        return $this->image;
-    }
-
-    public function setImage(Image $image): self
-    {
-        // set the owning side of the relation if necessary
-        if ($image->getParticipant() !== $this) {
-            $image->setParticipant($this);
-        }
-
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function getCampus(): ?Campus
     {
@@ -327,6 +312,18 @@ class Participant implements UserInterface
         if ($this->inscriptions->removeElement($inscription)) {
             $inscription->removeParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
