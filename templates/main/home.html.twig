@@ -46,7 +46,7 @@
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.dateHeureDebut|date("d/m/Y h:i") }}</td>
                     <td>{{ sortie.dateLimiteInscription|date("d/m/Y") }}</td>
-                    <td>??/{{ sortie.nbInsriptionsMax }}</td>
+                    <td>{{ sortie.participants.count }}/{{ sortie.nbInsriptionsMax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>
                         {% if  inscriptions == sortie.nom and app.user.pseudo != sortie.organisateur.pseudo and sortie.etat.libelle != "Créée" %}
