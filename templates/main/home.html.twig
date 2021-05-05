@@ -63,7 +63,7 @@
                                     <div>Modifier - Publier</div>
                                 {%  elseif sortie.etat.libelle == "Ouverte" %}
                                   <div> <a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
-                                    <div>- Annuler</div>
+                                    <div>- <a href="{{ path('sortie_annuler',{'id': sortie.id})}}" title="Annuler ">Annuler</a></div>
                                 {% endif %}
 
 
