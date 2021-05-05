@@ -21,15 +21,16 @@ class FilterListType extends AbstractType
                 'label' => 'Campus : '
             ])
             ->add('nom', TextType::class, [
-                'label' => 'Le nom de la sortie contient : '
+                'label' => 'Le nom de la sortie contient : ',
             ])
             ->add('dateMin', DateType::class, [
                 'label' => 'Entre',
-                'html5'=> 'true'
+                'html5'=> 'true',
+
             ])
             ->add('dateMax', DateType::class, [
                 'label' => 'Et',
-                'html5'=> 'true'
+                'html5'=> 'true',
             ])
         ;
     }
