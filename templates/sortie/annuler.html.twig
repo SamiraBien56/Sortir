@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuler une sortie{% endblock %}
+
+{% block body %}
+    <div class="grix xs4 container">
+    {% for message in app.flashes('message') %}
+        <div class="col-xs4">
+            <div class="p-3 my-2 rounded-2 success">{{message}}</div>
+        </div>
+    {% endfor %}
+    <div class="col-xs4">
+        <h1>Annuler une sortie</h1>
+    </div>
+    <div>
+        <div> Nom de la sortie : {{ sortie.nom }}</div>
+        <div> Date de la sortie : {{ sortie.dateHeureDebut|date("Y-m-d") }}</div>
+        <div> Campus : {{ sortie.campus.nom }}</div>
+        <div> Lieu : {{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.nom }}</div>
+    </div>
+    {{ form_start(sortieForm) }}
+    {{ form_row(sortieForm.infosSortie) }}
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    {{ form_end(sortieForm) }}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\AnnulerSortieType;
 use App\Form\CreerUneSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
@@ -64,6 +65,45 @@ class SortieController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/sortie/annuler/{id}", name = "sortie_annuler")
+     */
+    public function annuler(int $id, Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $sortieForm = $this ->createForm(AnnulerSortieType::class,$sortie);
+        $sortieForm-> handleRequest($request);
+        if($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+            $etat = $etatRepository->find(6);
+            $sortie->setEtat($etat);
+            $entityManager->flush();
+            $this->addFlash('success', 'La sortie a bien été annulée');
+            return $this->redirectToRoute('main_home');
+        }
+
+            return $this->render('sortie/annuler.html.twig', [
+            "sortie"=> $sortie,
+            'sortieForm'=>$sortieForm->createView()
+        ]);
+
+    }
+
+    /**
+     * @Route("/sortie/publier/{id}", name = "sortie_publier")
+     */
+    public function publier(int $id, SortieRepository $sortieRepository, EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $etat = $etatRepository->find(2);
+        $sortie->setEtat($etat);
+        $entityManager->flush();
+        $this->addFlash('success', 'La sortie a bien été publiée');
+        return $this->redirectToRoute('main_home');
+    }
+
+
+
     /**
      * @Route("/sortie/sinscrire/{id}", name = "sortie_sinscrire")
      */
