@@ -25,7 +25,6 @@ class MainController extends AbstractController
         if ($this->getUser() != null) {
 
             $inscriptions = $this->getUser()->getInscriptions();
-            dd($inscriptions);
 
             $filterForm = $this->createForm(FilterListType::class);
             $filterForm->handleRequest($request);
@@ -38,7 +37,7 @@ class MainController extends AbstractController
                 if ($this->getUser() != null) {
 
                     $user = $participantRepository->find($this->getUser()->getId());
-                    $listAllSorties = $sortieManager->getSortiesByCampus($user->getCampus()->getId());
+                    $listAllSorties = $sortieManager->getSortiesByCampus($user->getCampus()->getId(), $user->getId());
 
                 } else {
                     $listAllSorties = $sortieManager->getAllSorties();
@@ -47,7 +46,7 @@ class MainController extends AbstractController
             return $this->render('main/home.html.twig', [
                 'listAllSorties' => $listAllSorties,
                 'filterForm' => $filterForm->createView(),
-                'inscription' => $inscriptions
+                'inscriptions' => $inscriptions
             ]);
         }else{
             return $this->redirectToRoute('app_login');

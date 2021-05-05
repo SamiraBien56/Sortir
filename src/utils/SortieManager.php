@@ -23,14 +23,18 @@ class SortieManager
         return $allSorties;
     }
 
-    public function getSortiesByCampus($idCampus)
+    public function getSortiesByCampus($idCampus, $idUser)
     {
         $sortiesByCampus = $this->entityManager->createQuery(
             'SELECT sortie FROM App\Entity\Sortie sortie
             LEFT JOIN sortie.campus campus
-            WHERE campus.id LIKE :idCampus'
+            LEFT JOIN sortie.etat etat
+            LEFT JOIN sortie.organisateur organisateur
+            WHERE campus.id LIKE :idCampus AND etat.id=2 OR etat.id=3 OR etat.id=4
+            OR organisateur.id LIKE :idUser'
         )
-            ->setParameter('idCampus', $idCampus);
+            ->setParameter('idCampus', $idCampus)
+            ->setParameter('idUser', $idUser);
         $allSorties = $sortiesByCampus->getResult();
         return $allSorties;
     }
@@ -65,12 +69,11 @@ class SortieManager
 
 }
 
-    public function sinscrire($idSortie, $idParticipant){
+    /*public function sinscrire($idSortie, $idParticipant){
         $inscription =$this->entityManager->createQuery(
             'INSERT INTO `sortie_participant`(`sortie_id`, `participant_id`)
                 '
         )
             ->setParameter('idSortie', $idSortie)
-            ->setParameter('idParticipant', $idParticipant);
+            ->setParameter('idParticipant', $idParticipant);*/
 
-}

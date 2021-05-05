@@ -2,9 +2,6 @@
 {% block title %}Sortir{% endblock %}
 {% block body %}
 
-    {% for inscription in inscriptions %}
-        {{ inscription.nom }}
-    {% endfor %}
     <section class="container">
         <div class="row">
             <div class="col-12 col-lg-8"></div>
@@ -52,11 +49,11 @@
                     <td>??/{{ sortie.nbInsriptionsMax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>
-                        {% if  inscription == sortie.nom and app.user.pseudo != sortie.organisateur.pseudo and sortie.etat.libelle != "Créée" %}
+                        {% if  inscriptions == sortie.nom and app.user.pseudo != sortie.organisateur.pseudo and sortie.etat.libelle != "Créée" %}
                             <div> x </div>
                         {% else %}
                             <div> </div>
-                            {% endif %}
+                        {% endif %}
                     </td>
                     <td>{{ sortie.organisateur.pseudo }}</td>
 
