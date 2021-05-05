@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
             $images = $form->get('image')->getData();
             foreach ($images as $image){
                 // on génére un nouveau nom de fichier
-                $fichier = md5(uniqid()).'.'.$images->guessExtension();
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
 
                 //on copie le fichier dans img
                 $image->move(
