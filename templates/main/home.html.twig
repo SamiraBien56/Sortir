@@ -80,7 +80,11 @@
                                     {% endif %}
                                     {% endfor %}
                                     {% if ok==0 %}
-                                        <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>-<a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire </a></div>
+                                        <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>
+                                            {% if sortie.etat.id == 2 %}
+                                                - <a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire </a>
+                                            {% endif %}
+                                        </div>
                                     {% endif %}
                                 {% else %}
                                     <div> en chantier</div>
