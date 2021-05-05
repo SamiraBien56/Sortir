@@ -3,17 +3,20 @@
 namespace App\utils;
 
 use App\Entity\Sortie;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class SortieManager
 {
     private $sortieRepository;
+    private $etatRepository;
 
     public function __construct(SortieRepository $sortieRepository,
-                                EntityManagerInterface $entityManager)
+                                EntityManagerInterface $entityManager, EtatRepository $etatRepository)
     {
         $this->sortieRepository = $sortieRepository;
+        $this->etatRepository = $etatRepository;
         $this->entityManager = $entityManager;
     }
 
@@ -67,7 +70,30 @@ class SortieManager
         return $sortie;
     }
 
-}
+    public function majEtatSorties() {
+        $jour = new \DateTime();
+        $sorties = $this->entityManager->createQuery(
+            'SELECT sortie FROM App\Entity\Sortie sortie
+            LEFT JOIN sortie.etat etat
+            WHERE etat.id=2 OR etat.id=3 or etat.id=4');
+        $res = $sorties->getResult();
+        foreach ($res as $sortie) {
+            if($sortie->getDateLimiteInscription() < $jour){
+                $etat = $this->etatRepository->find(3);
+                $sortie->setEtat($etat);
+                if ($sortie->getDateHeureDebut() < $jour->add(date_interval_create_from_date_string('1 day'))){
+                    $etat = $this->etatRepository->find(5);
+                    $sortie->setEtat($etat);
+                }
+            }
+            $this->entityManager->flush();
+        }
+
+
+        return $res;
+    }
+
+
 
     /*public function sinscrire($idSortie, $idParticipant){
         $inscription =$this->entityManager->createQuery(
@@ -77,3 +103,4 @@ class SortieManager
             ->setParameter('idSortie', $idSortie)
             ->setParameter('idParticipant', $idParticipant);*/
 
+}

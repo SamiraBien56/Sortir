@@ -22,6 +22,7 @@ class MainController extends AbstractController
      */
     public function home(SortieManager $sortieManager, UserManager $userManager, Request $request, ParticipantRepository $participantRepository)
     {
+        $maj = $sortieManager->majEtatSorties();
         if ($this->getUser() != null) {
 
             $inscriptions = $this->getUser()->getInscriptions();
@@ -46,7 +47,8 @@ class MainController extends AbstractController
             return $this->render('main/home.html.twig', [
                 'listAllSorties' => $listAllSorties,
                 'filterForm' => $filterForm->createView(),
-                'inscriptions' => $inscriptions
+                'inscriptions' => $inscriptions,
+                //'maj' => $maj
             ]);
         }else{
             return $this->redirectToRoute('app_login');
