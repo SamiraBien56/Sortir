@@ -24,17 +24,15 @@ class MainController extends AbstractController
     public function home(SortieManager $sortieManager, UserManager $userManager, Request $request,
                          ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
     {
-        $userId = $this->getUser()->getId();
-        $insc = $participantRepository->find($userId);
-
-        $inscriptions= $insc->getInscriptions();
-
-        $entityManager->flush();
-
-        $maj = $sortieManager->majEtatSorties();
         if ($this->getUser() != null) {
 
-            //$inscriptions = $this->getUser()->getInscriptions();
+            $userId = $this->getUser()->getId();
+            $insc = $participantRepository->find($userId);
+
+            $inscriptions= $insc->getInscriptions();
+
+            $entityManager->flush();
+            $sortieManager->majEtatSorties();
 
             $filterForm = $this->createForm(FilterListType::class);
             $filterForm->handleRequest($request);

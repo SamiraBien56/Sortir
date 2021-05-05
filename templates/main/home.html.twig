@@ -81,7 +81,7 @@
                                     {% endfor %}
                                     {% if ok==0 %}
                                         <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>
-                                            {% if sortie.etat.id == 2 %}
+                                            {% if sortie.etat.id == 2 and sortie.nbInsriptionsMax > sortie.participants.count %}
                                                 - <a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire </a>
                                             {% endif %}
                                         </div>
