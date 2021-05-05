@@ -2,6 +2,7 @@
 
 namespace App\utils;
 
+use App\Entity\Sortie;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -34,22 +35,25 @@ class SortieManager
         return $allSorties;
     }
 
-    public function getSortiesByFilter($idCampus, $dateMin, $dateMax)
+    public function getSortiesByFilter($idCampus, $nom, $dateMin, $dateMax)
     {
-        $dateM = new \DateTime(implode('-', $dateMin));
-        $dateMa = new \DateTime(implode('-', $dateMax));
+            $dateM = new \DateTime(implode('-', $dateMin));
+            $dateMa = new \DateTime(implode('-', $dateMax));
 
-        $sortiesByCampus = $this->entityManager->createQuery(
+        $sortiesFilter = $this->entityManager->createQuery(
             'SELECT sortie FROM App\Entity\Sortie sortie
             LEFT JOIN sortie.campus campus
-            WHERE campus.id LIKE :idCampus AND sortie.dateHeureDebut BETWEEN :dateMin  AND :dateMax'
+            WHERE campus.id LIKE :idCampus 
+            AND sortie.nom LIKE :nom 
+            AND sortie.dateHeureDebut BETWEEN :dateMin  AND :dateMax'
         )
             ->setParameter('idCampus', $idCampus)
+            ->setParameter('nom', "%{$nom}%")
             ->setParameter('dateMin', $dateM->format('Y-d-m'))
             ->setParameter('dateMax', $dateMa->format('Y-d-m'))
         ;
 
-        $allSorties = $sortiesByCampus->getResult();
+        $allSorties = $sortiesFilter->getResult();
         return $allSorties;
     }
 
