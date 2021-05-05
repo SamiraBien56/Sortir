@@ -82,17 +82,14 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/sinscrire/{id}", name = "sortie_sinscrire")
      */
-    public function sinscrire(Sortie $sortie, EntityManagerInterface $entityManager){
+    public function sinscrire( int $id,EntityManagerInterface $entityManager, ParticipantRepository $participantRepository, SortieRepository $sortieRepository){
         $userId = $this->getUser()->getId();
-        $sortieId = $sortie->getId();
-
-        $entityManager->persist();
+        $user = $participantRepository->find($userId);
+        $sortie = $sortieRepository->find($id);
+        $user->addInscription($sortie);
         $entityManager->flush();
 
-        return $this->render('main/home.html.twig', [
-            "participant"=> $participant
-        ]);
-
+        return $this->redirectToRoute('main_home');
 
     }
 
