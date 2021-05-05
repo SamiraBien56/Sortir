@@ -5,25 +5,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=yes, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Sortir !!{% endblock %}</title>
+   <title>{% block title %}Sortir{% endblock %}</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <link rel="icon" href="{{ asset('img/logo.png')}}">
 </head>
 <body>
 <header>
+    <img src="{{ asset('img/logo.png') }}">
     {% include('nav/nav.html.twig') %}
 </header>
 {% block body %}
-    <style>
-        body {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("/public/img/randonneee.jpg");
-        }
-    </style>
 {%  endblock body %}
-
 
 <footer>
     <div>&copy; {{ "now"|date('h:i:s-d/m/Y') }} Series!</div>

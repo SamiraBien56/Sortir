@@ -4,10 +4,11 @@ html {
 body {
     background: linear-gradient(#000000, #132135);
     background-attachment: fixed;
-    color: #38E7D9;
+    color: #FDFEFE ;
     font-family: 'Zen Dots', serif;
     background-size: cover;
     background-position: center center;
+   background-image: url("bar.jpg");
 
 
 }
@@ -58,21 +59,6 @@ nav li {
     margin-right: 1rem;
 }
 
-.series-list {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-}
-
-.serie-details {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 30px;
-}
-
-.serie-details-infos > div {
-    margin-bottom: 1rem;
-}
 
 /* forms */
 input[type="text"],
@@ -92,23 +78,3 @@ form > div > div {
     margin-bottom: 1rem;
 }
 
-#serie_genres label {
-    margin: 0 0.5rem 0 0.1rem;
-}
-
-.seasons article {
-    display: flex;
-    margin-bottom: 1rem;
-}
-
-.seasons article img {
-    max-height: 200px;
-    margin-right: 0.6rem;
-}
-
-
-@media screen and (min-width: 700px) {
-    .serie-details {
-        grid-template-columns: 300px 1fr;
-    }
-}
