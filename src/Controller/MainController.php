@@ -22,24 +22,37 @@ class MainController extends AbstractController
      */
     public function home(SortieManager $sortieManager, UserManager $userManager, Request $request, ParticipantRepository $participantRepository)
     {
+        $maj = $sortieManager->majEtatSorties();
+        if ($this->getUser() != null) {
 
-        $filterForm = $this->createForm(FilterListType::class);
-        $filterForm->handleRequest($request);
-        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
-            $req = $request->request->all("filter_list");
-            $listAllSorties = $sortieManager->getSortiesByFilter($req["campus"], $req["nom"], $req["dateMin"], $req["dateMax"]);
-        } else {
-            if($this->getUser() != null) {
-                $user = $participantRepository->find($this->getUser()->getId());
-                $listAllSorties = $sortieManager->getSortiesByCampus($user->getCampus()->getId());
+            $inscriptions = $this->getUser()->getInscriptions();
+
+            $filterForm = $this->createForm(FilterListType::class);
+            $filterForm->handleRequest($request);
+
+            if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+
+                $req = $request->request->all("filter_list");
+                $listAllSorties = $sortieManager->getSortiesByFilter($req["campus"], $req["nom"], $req["dateMin"], $req["dateMax"]);
             } else {
-                $listAllSorties = $sortieManager->getAllSorties();
-            }
-        }
-        return $this->render('main/home.html.twig', [
-            'listAllSorties' => $listAllSorties,
-            'filterForm'=> $filterForm->createView()
-        ]);
-    }
+                if ($this->getUser() != null) {
 
-}
+                    $user = $participantRepository->find($this->getUser()->getId());
+                    $listAllSorties = $sortieManager->getSortiesByCampus($user->getCampus()->getId(), $user->getId());
+
+                } else {
+                    $listAllSorties = $sortieManager->getAllSorties();
+                }
+            }
+            return $this->render('main/home.html.twig', [
+                'listAllSorties' => $listAllSorties,
+                'filterForm' => $filterForm->createView(),
+                'inscriptions' => $inscriptions,
+                //'maj' => $maj
+            ]);
+        }else{
+            return $this->redirectToRoute('app_login');
+        }
+
+
+}}

@@ -22,15 +22,15 @@ class FilterListType extends AbstractType
             ])
             ->add('nom', TextType::class, [
                 'label' => 'Le nom de la sortie contient : ',
+                'required'=> false
             ])
             ->add('dateMin', DateType::class, [
                 'label' => 'Entre',
-                'html5'=> 'true',
-
+                'html5'=> 'true'
             ])
             ->add('dateMax', DateType::class, [
                 'label' => 'Et',
-                'html5'=> 'true',
+                'html5'=> 'true'
             ])
         ;
     }
