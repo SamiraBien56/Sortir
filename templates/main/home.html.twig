@@ -1,6 +1,7 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Sortir{% endblock %}
 {% block body %}
+
     <section class="container">
         <div class="row">
             <div class="col-12 col-lg-8"></div>
@@ -9,7 +10,7 @@
                 Participant : {{ app.user.pseudo }}
             {% endif %}</div>
         </div>
-          <h4>Filtrer les sorties</h4>
+        <h4>Filtrer les sorties</h4>
         {{ form_start(filterForm) }}
         <div class="row">
 
@@ -45,14 +46,14 @@
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.dateHeureDebut|date("d/m/Y h:i") }}</td>
                     <td>{{ sortie.dateLimiteInscription|date("d/m/Y") }}</td>
-                    <td>??/{{ sortie.nbInsriptionsMax }}</td>
+                    <td>{{ sortie.participants.count }}/{{ sortie.nbInsriptionsMax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>
-                        {% if  inscription == sortie.nom and app.user.pseudo != sortie.organisateur.pseudo and sortie.etat.libelle != "Créée" %}
+                        {% if  inscriptions == sortie.nom and app.user.pseudo != sortie.organisateur.pseudo and sortie.etat.libelle != "Créée" %}
                             <div> x </div>
                         {% else %}
                             <div> </div>
-                            {% endif %}
+                        {% endif %}
                     </td>
                     <td>{{ sortie.organisateur.pseudo }}</td>
 
@@ -69,9 +70,9 @@
                             {% elseif app.user.pseudo != sortie.organisateur.pseudo %}
                                 {% if sortie.etat.libelle == "Cloturée" or sortie.etat.libelle == "Activité en cours" or sortie.etat.libelle == "Passée"%}
                                     <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
-                                {% elseif sortie.etat.libelle == "Ouverte" and inscription != sortie.nom %}
-                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>-<div></div><div><a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire</a></div>
-                                {% elseif sortie.etat.libelle == "Ouverte" and inscription == sortie.nom%}
+                                {% elseif sortie.etat.libelle == "Ouverte" and inscriptions != sortie.nom %}
+                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a><div> <div>- S'inscrire </div>
+                                {% elseif sortie.etat.libelle == "Ouverte" and inscriptions == sortie.nom%}
                                     <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div><div> - Se désister </div>
 
                                 {% else %}
@@ -86,9 +87,7 @@
                                         </div>
                                     </div>
                         </td>
-
                 </tr>
-
             {% endfor %}
             </tbody>
         </table>

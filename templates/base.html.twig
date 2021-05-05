@@ -12,6 +12,11 @@
     {% include('nav/nav.html.twig') %}
 </header>
 {% block body %}
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url({{ asset('img/randonneee.jpg') }});
+        }
+    </style>
 {%  endblock body %}
 </body>
 </html>

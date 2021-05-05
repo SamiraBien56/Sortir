@@ -28,6 +28,29 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+
+            $images = $form->get('image')->getData();
+            $fichier = md5(uniqid()).'.'.$images->guessExtension();
+            $user->setImage($fichier);
+
+            $images->move(
+                $this->getParameter('images_directory'),
+                $fichier);
+            /*foreach ($images as $image){
+                // on génére un nouveau nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
+                //dd($fichier);
+
+                //on copie le fichier dans img
+                $image->move(
+                  $this->getParameter('images_directory'),
+                    $fichier
+                );
+                // on stock en bdd
+                $img = $this->getUser()->setImage('coucou');
+                $user->setImage($img);
+            } */
+
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
