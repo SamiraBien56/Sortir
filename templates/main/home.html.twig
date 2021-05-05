@@ -49,32 +49,43 @@
                     <td>{{ sortie.participants.count }}/{{ sortie.nbInsriptionsMax }}</td>
                     <td>{{ sortie.etat.libelle }}</td>
                     <td>
-                        {% if  inscriptions == sortie.nom and app.user.pseudo != sortie.organisateur.pseudo and sortie.etat.libelle != "Créée" %}
-                            <div> x </div>
-                        {% else %}
-                            <div> </div>
-                        {% endif %}
+                        {% for inscription in inscriptions %}
+                            {% if  inscription.id == sortie.id and app.user.pseudo != sortie.organisateur.pseudo %}
+                                <div> x </div>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
                     </td>
                     <td>{{ sortie.organisateur.pseudo }}</td>
 
                         <td>{% if app.user != null %}
                             {% if app.user.pseudo == sortie.organisateur.pseudo %}
                                 {%  if sortie.etat.libelle == "Créée" %}
-                                    <div>Modifier - Publier</div>
+                                    <div>Modifier - <a href="{{ path('sortie_publier',{'id': sortie.id})}}" title="Publier ">Publier</a></div>
                                 {%  elseif sortie.etat.libelle == "Ouverte" %}
                                   <div> <a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
-                                    <div>- Annuler</div>
+                                    <div>- <a href="{{ path('sortie_annuler',{'id': sortie.id})}}" title="Annuler ">Annuler</a></div>
                                 {% endif %}
 
 
                             {% elseif app.user.pseudo != sortie.organisateur.pseudo %}
-                                {% if sortie.etat.libelle == "Cloturée" or sortie.etat.libelle == "Activité en cours" or sortie.etat.libelle == "Passée"%}
+                                {% if sortie.etat.id == 3 or sortie.etat.id == 4 or sortie.etat.id == 5 %}
                                     <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
-                                {% elseif sortie.etat.libelle == "Ouverte" and inscriptions != sortie.nom %}
-                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>-<a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire </a></div>
-                                {% elseif sortie.etat.libelle == "Ouverte" and inscriptions == sortie.nom%}
-                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>Se désister</div>
-
+                                {% elseif sortie.etat.id == 2 %}
+                                    {% set ok=0 %}
+                                    {% for inscription in inscriptions %}
+                                    {% if  inscription.id == sortie.id and app.user.pseudo != sortie.organisateur.pseudo %}
+                                        {% set ok=1 %}
+                                        <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>-<a href="{{ path('sortie_sedesister',{'id': sortie.id})}}" title="sedesister ">Se désister</div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if ok==0 %}
+                                        <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>
+                                            {% if sortie.etat.id == 2 and sortie.nbInsriptionsMax > sortie.participants.count %}
+                                                - <a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire </a>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
                                 {% else %}
                                     <div> en chantier</div>
                                 {% endif %}
@@ -84,8 +95,6 @@
 
                                 <div>connecte toi</div>
                             {% endif %}
-                                        </div>
-                                    </div>
                         </td>
                 </tr>
             {% endfor %}

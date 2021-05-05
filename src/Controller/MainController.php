@@ -8,6 +8,7 @@ use App\Form\FilterListType;
 use App\Repository\ParticipantRepository;
 use App\utils\SortieManager;
 use App\utils\UserManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,12 +21,18 @@ class MainController extends AbstractController
      * @Route ("/", name="main_home")
      *
      */
-    public function home(SortieManager $sortieManager, UserManager $userManager, Request $request, ParticipantRepository $participantRepository)
+    public function home(SortieManager $sortieManager, UserManager $userManager, Request $request,
+                         ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
     {
-        $maj = $sortieManager->majEtatSorties();
         if ($this->getUser() != null) {
 
-            $inscriptions = $this->getUser()->getInscriptions();
+            $userId = $this->getUser()->getId();
+            $insc = $participantRepository->find($userId);
+
+            $inscriptions= $insc->getInscriptions();
+
+            $entityManager->flush();
+            $sortieManager->majEtatSorties();
 
             $filterForm = $this->createForm(FilterListType::class);
             $filterForm->handleRequest($request);
@@ -48,6 +55,7 @@ class MainController extends AbstractController
                 'listAllSorties' => $listAllSorties,
                 'filterForm' => $filterForm->createView(),
                 'inscriptions' => $inscriptions,
+
                 //'maj' => $maj
             ]);
         }else{
