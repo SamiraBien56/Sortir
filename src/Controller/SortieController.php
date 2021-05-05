@@ -67,8 +67,12 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/sinscrire/{id}", name = "sortie_sinscrire")
      */
-    public function sinscrire(){
-        $participant = $this->getUser()->addParticipant();
+    public function sinscrire(Sortie $sortie, EntityManagerInterface $entityManager){
+        $userId = $this->getUser()->getId();
+        $sortieId = $sortie->getId();
+
+        $entityManager->persist();
+        $entityManager->flush();
 
         return $this->render('main/home.html.twig', [
             "participant"=> $participant

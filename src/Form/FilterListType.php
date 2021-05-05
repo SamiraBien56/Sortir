@@ -21,7 +21,8 @@ class FilterListType extends AbstractType
                 'label' => 'Campus : '
             ])
             ->add('nom', TextType::class, [
-                'label' => 'Le nom de la sortie contient : '
+                'label' => 'Le nom de la sortie contient : ',
+                'required'=> false
             ])
             ->add('dateMin', DateType::class, [
                 'label' => 'Entre',
