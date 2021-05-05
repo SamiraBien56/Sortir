@@ -70,10 +70,10 @@
                             {% elseif app.user.pseudo != sortie.organisateur.pseudo %}
                                 {% if sortie.etat.libelle == "Cloturée" or sortie.etat.libelle == "Activité en cours" or sortie.etat.libelle == "Passée"%}
                                     <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
-                                {% elseif sortie.etat.libelle == "Ouverte" and inscription != sortie.nom %}
-                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a><div> <div>- S'inscrire </div>
-                                {% elseif sortie.etat.libelle == "Ouverte" and inscription == sortie.nom%}
-                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div><div> - Se désister </div>
+                                {% elseif sortie.etat.libelle == "Ouverte" and inscriptions != sortie.nom %}
+                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>-<a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire </a></div>
+                                {% elseif sortie.etat.libelle == "Ouverte" and inscriptions == sortie.nom%}
+                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a>Se désister</div>
 
                                 {% else %}
                                     <div> en chantier</div>
@@ -87,9 +87,7 @@
                                         </div>
                                     </div>
                         </td>
-
                 </tr>
-
             {% endfor %}
             </tbody>
         </table>

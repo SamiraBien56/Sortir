@@ -88,9 +88,6 @@ class SortieManager
             }
             $this->entityManager->flush();
         }
-
-
-        return $res;
     }
 
 
