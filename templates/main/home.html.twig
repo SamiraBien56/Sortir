@@ -9,7 +9,7 @@
                 Participant : {{ app.user.pseudo }}
             {% endif %}</div>
         </div>
-        <h4>Filtrer les sorties</h4>
+          <h4>Filtrer les sorties</h4>
         {{ form_start(filterForm) }}
         <div class="row">
 
@@ -70,7 +70,7 @@
                                 {% if sortie.etat.libelle == "Cloturée" or sortie.etat.libelle == "Activité en cours" or sortie.etat.libelle == "Passée"%}
                                     <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
                                 {% elseif sortie.etat.libelle == "Ouverte" and inscription != sortie.nom %}
-                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a><div> <div>- S'inscrire </div>
+                                    <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>-<div></div><div><a href="{{ path('sortie_sinscrire',{'id': sortie.id})}}" title="sinscrire "> S'inscrire</a></div>
                                 {% elseif sortie.etat.libelle == "Ouverte" and inscription == sortie.nom%}
                                     <div><a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div><div> - Se désister </div>
 

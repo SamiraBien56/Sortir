@@ -25,7 +25,7 @@ class MainController extends AbstractController
         if ($this->getUser() != null) {
 
             $inscriptions = $this->getUser()->getInscriptions();
-            dd($inscriptions);
+
 
             $filterForm = $this->createForm(FilterListType::class);
             $filterForm->handleRequest($request);

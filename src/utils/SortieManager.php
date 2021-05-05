@@ -64,13 +64,3 @@ class SortieManager
     }
 
 }
-
-    public function sinscrire($idSortie, $idParticipant){
-        $inscription =$this->entityManager->createQuery(
-            'INSERT INTO `sortie_participant`(`sortie_id`, `participant_id`)
-                '
-        )
-            ->setParameter('idSortie', $idSortie)
-            ->setParameter('idParticipant', $idParticipant);
-
-}
