@@ -23,6 +23,8 @@ class MainController extends AbstractController
     public function home(SortieManager $sortieManager, UserManager $userManager, Request $request, ParticipantRepository $participantRepository)
     {
 
+        $inscriptions = $this->getUser()->getInscriptions();
+
         $filterForm = $this->createForm(FilterListType::class);
         $filterForm->handleRequest($request);
         if ($filterForm->isSubmitted() && $filterForm->isValid()) {
@@ -38,7 +40,8 @@ class MainController extends AbstractController
         }
         return $this->render('main/home.html.twig', [
             'listAllSorties' => $listAllSorties,
-            'filterForm'=> $filterForm->createView()
+            'filterForm'=> $filterForm->createView(),
+            'inscriptions' => $inscriptions
         ]);
     }
 

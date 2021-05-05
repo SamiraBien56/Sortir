@@ -1,6 +1,10 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Sortir{% endblock %}
 {% block body %}
+
+    {% for inscription in inscriptions %}
+        {{ inscription.nom }}
+    {% endfor %}
     <section class="container">
         <div class="row">
             <div class="col-12 col-lg-8"></div>
