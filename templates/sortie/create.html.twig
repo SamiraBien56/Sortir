@@ -7,7 +7,7 @@
             <div class="col-12 col-lg-2"></div>
             <div class="col-12 col-lg-8">
                 {{ form_start(sortieForm) }}
-                <div class="row">
+                <div class="creation_sortie">
                     <div class="col-12 col-lg-6">
                         {{ form_row(sortieForm.nom) }}
                         {{ form_row(sortieForm.dateHeureDebut) }}
@@ -16,7 +16,7 @@
                         {{ form_row(sortieForm.duree) }}
                         {{ form_row(sortieForm.infosSortie) }}
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="maman col-12 col-lg-6">
                         Campus : {{ app.user.campus.nom }}
                         {{ form_row(sortieForm.ville) }}
                         {{ form_row(sortieForm.lieu) }}

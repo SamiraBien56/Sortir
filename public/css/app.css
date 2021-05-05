@@ -78,3 +78,9 @@ form > div > div {
     margin-bottom: 1rem;
 }
 
+
+.creation_sortie{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
