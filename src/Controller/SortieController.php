@@ -64,6 +64,21 @@ class SortieController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/sortie/annuler/{id}", name = "sortie_annuler")
+     */
+    public function annuler(int $id, SortieRepository $sortieRepository, SortieManager $sortieManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+
+        return $this->render('sortie/annuler.html.twig', [
+            "sortie"=> $sortie
+        ]);
+
+    }
+
+
     /**
      * @Route("/sortie/sinscrire/{id}", name = "sortie_sinscrire")
      */
