@@ -60,7 +60,7 @@
                         <td>{% if app.user != null %}
                             {% if app.user.pseudo == sortie.organisateur.pseudo %}
                                 {%  if sortie.etat.libelle == "Créée" %}
-                                    <div>Modifier - Publier</div>
+                                    <div>Modifier - <a href="{{ path('sortie_publier',{'id': sortie.id})}}" title="Publier ">Publier</a></div>
                                 {%  elseif sortie.etat.libelle == "Ouverte" %}
                                   <div> <a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
                                     <div>- <a href="{{ path('sortie_annuler',{'id': sortie.id})}}" title="Annuler ">Annuler</a></div>
