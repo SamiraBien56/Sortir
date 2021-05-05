@@ -117,5 +117,18 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('main_home');
 
     }
+    /**
+     * @Route("/sortie/sedesister/{id}", name = "sortie_sedesister")
+     */
+    public function seDesister( int $id,EntityManagerInterface $entityManager, ParticipantRepository $participantRepository, SortieRepository $sortieRepository){
+        $userId = $this->getUser()->getId();
+        $user = $participantRepository->find($userId);
+        $sortie = $sortieRepository->find($id);
+        $user->removeInscription($sortie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('main_home');
+
+    }
 
 }
