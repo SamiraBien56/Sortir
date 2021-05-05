@@ -49,7 +49,6 @@ class CreerUneSortieType extends AbstractType
 
             ])
             ->add('duree', TimeType::class, [
-
                 'label'=>'Durée'
             ])
 
