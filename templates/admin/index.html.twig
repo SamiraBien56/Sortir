@@ -9,7 +9,16 @@
     .admin_controller2 { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 </style> #}
 
-    <div class="admin_controller"><h1>Hello {{ app.user.pseudo }}!</h1></div>
+    <div class="admin_controller"><h1>Admin</h1></div>
 
-    <div class="admin_controller2"><h2>Opérations d'administrateur</h2></div>
+    <div class="admin_controller2"><h2>Opérations d'administrations</h2></div>
+
+    <div class ="barre_navigation_admin">
+
+        <div><button><a href="#" class="btn blue"><span>Ajouter un utilisateur</span></a></button>
+            <div><button><a href="#" class="btn blue"><span>Inscrire un utilisateur</span></a></button></div>
+            <div><button><a href="#" class="btn blue"><span>Désactiver un compte</span></a></button></div>
+            <div><button><a href="#" class="btn blue"><span>Gérer les sorties</span></a></button></div>
+            <div><button><a href="#" class="btn blue"><span>Ajouter des utilisteur via fichier CSV</span></a></button></div>
+    </div>
 {% endblock %}
