@@ -105,8 +105,8 @@ button {
     border: 4px double #cccccc;
     color: #eeeeee;
     text-align: center;
-    font-size: 28px;
-    padding: 20px;
+    font-size: 20px;
+    padding: 10px;
     width: 350px;
     transition: all 0.5s;
     cursor: pointer;

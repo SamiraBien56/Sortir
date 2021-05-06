@@ -23,7 +23,7 @@
                 {{ form_row(filterForm.dateMax) }}
             </div>
             <div class="col-12 col-lg-5">FILTRE CHECKBOX</div>
-            <div class="col-12 col-lg-2"><button class="btn btn-success" type="submit">Rechercher</button> </div>
+            <div class="col-12 col-lg-2"><button class="btn btn-success" type="submit"><span>Rechercher</span></button> </div>
 
         </div>
         {{ form_end(filterForm) }}
@@ -102,6 +102,6 @@
             {% endfor %}
             </tbody>
         </table>
-        <button class="btn btn-success"><a href="{{ path('sortie_create') }}" title="Cree un sortie">Créer une sortie</a> </button>
+        <button class="btn btn-success"><a href="{{ path('sortie_create') }}" title="Cree un sortie"><span>Créer une sortie</span></a> </button>
     </section>
 {% endblock %}
