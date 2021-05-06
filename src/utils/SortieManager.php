@@ -28,16 +28,25 @@ class SortieManager
 
     public function getSortiesByCampus($idCampus, $idUser)
     {
+        $monthAfter = new \DateTime('+5 weeks');
+        $monthAgo = new \DateTime('1 month ago');
         $sortiesByCampus = $this->entityManager->createQuery(
             'SELECT sortie FROM App\Entity\Sortie sortie
             LEFT JOIN sortie.campus campus
             LEFT JOIN sortie.etat etat
             LEFT JOIN sortie.organisateur organisateur
-            WHERE campus.id LIKE :idCampus AND etat.id=2 OR etat.id=3 OR etat.id=4
-            OR organisateur.id LIKE :idUser'
+            WHERE sortie.dateHeureDebut BETWEEN :monthAgo AND :monthAfter
+            AND campus.id LIKE :idCampus
+            AND etat.id=2 OR etat.id=3 OR etat.id=4 OR etat.id=5
+            OR organisateur.id LIKE :idUser
+            '
         )
+            ->setParameter('monthAgo', $monthAgo)
+            ->setParameter('monthAfter', $monthAfter)
             ->setParameter('idCampus', $idCampus)
-            ->setParameter('idUser', $idUser);
+            ->setParameter('idUser', $idUser)
+
+        ;
         $allSorties = $sortiesByCampus->getResult();
         return $allSorties;
     }

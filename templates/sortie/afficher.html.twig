@@ -43,9 +43,8 @@
  {% if listAllParticipants.participants != null %}
         {% for participant in listAllParticipants.participants%}
             <tr>
-                <td>{{ participant.pseudo}}</td>
+                <td><a href="{{ path('profil_detail',{'id': participant.id})}}" title="Afficher le profil ">{{ participant.pseudo}}</td>
                 <td>{{ participant.nom}}</td>
-
             </tr>
         {% endfor %}
 {% endif %}
