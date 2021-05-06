@@ -41,3 +41,11 @@
    Créer une sortie |{{ parent() }}
 {% endblock %}
 
+{% block extrastyles %}
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('css/bar.jpg') }}");
+        }
+    </style>
+{% endblock %}
+

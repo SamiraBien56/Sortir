@@ -32,7 +32,7 @@
         </div>
         <div class="col-xs4">
             <button> <a href="{{ path('profil_editProfil') }}" class="btn btn-success">Modifier</a></button>
-         {#    <button><a href="{{ path('user_delete') }}" class="btn btn-danger">Supprimer</a></button> #}
+            <button><a href="{{ path('delete_user', {'id': app.user.id})  }}" class="btn btn-danger">Supprimer</a></button>
         </div>
 
        {#  <div class="col-xs4">
