@@ -34,10 +34,10 @@ class CreerUneSortieType extends AbstractType
 
             ])
             ->add('dateHeureDebut', DateTimeType::class,[
-                'label'=>'Date et heure de la sortie:',
+                'label'=>'Date et heure de la sortie',
                 'input'=>'datetime',
                 'html5' => true,
-                'widget' => 'choice'
+                'widget' => 'single_text',
             ])
             ->add('dateLimiteInscription', DateType::class, [
                 'label' => "Date limite d'inscription",
@@ -49,7 +49,6 @@ class CreerUneSortieType extends AbstractType
 
             ])
             ->add('duree', TimeType::class, [
-
                 'label'=>'Durée'
             ])
 

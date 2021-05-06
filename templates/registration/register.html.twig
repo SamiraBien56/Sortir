@@ -7,8 +7,8 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
-
+    <div class="register_title"> <h1>Inscription</h1></div>
+    <div class="register">
     {{ form_start(registrationForm) }}
     {{ form_row(registrationForm.pseudo) }}
     {{ form_row(registrationForm.nom) }}
@@ -19,8 +19,10 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+        <br>
     {{ form_row(registrationForm.image) }}
-
-        <button type="submit" class="btn btn-success">Register</button>
+        <br>
+        <button type="submit" class="btn btn-success"><span>S'inscrire</span></button>
     {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}

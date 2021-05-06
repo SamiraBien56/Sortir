@@ -7,7 +7,7 @@
             <div class="col-12 col-lg-2"></div>
             <div class="col-12 col-lg-8">
                 {{ form_start(sortieForm) }}
-                <div class="row">
+                <div class="creation_sortie">
                     <div class="col-12 col-lg-6">
                         {{ form_row(sortieForm.nom) }}
                         {{ form_row(sortieForm.dateHeureDebut) }}
@@ -26,8 +26,11 @@
                         <label>Longitude :</label><br>
                     </div>
                 </div>
-                <button class="btn btn-success">Enregistrer </button>
+
+                <div class="bouton_enregistrer_sortie">
+                <button class="btn btn-success"><span>Enregistrer</span></button>
                 {{ form_end(sortieForm) }}
+                </div>
             </div>
             <div class="col-12 col-lg-2"></div>
         </div>
@@ -36,5 +39,13 @@
 
 {% block title %}
    Créer une sortie |{{ parent() }}
+{% endblock %}
+
+{% block extrastyles %}
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('css/bar.jpg') }}");
+        }
+    </style>
 {% endblock %}
 

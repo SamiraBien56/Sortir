@@ -5,7 +5,7 @@
 {% block body %}
     <section class="container row">
     <div class="col-12 col-lg-4"></div>
-    <div class="col-12 col-lg-4">
+    <div class="ce_connecter">
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -23,9 +23,7 @@
             <label for="inputPassword">Password</label>
             <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="checkbox mb-3">
                     <label>
                         <input type="checkbox" name="_remember_me"> Se souvenir de moi
@@ -35,8 +33,16 @@
             <button class="btn btn-lg btn-success" type="submit">
                 Connexion
             </button>
+            <div>
+                <a href="{{ path('app_forgot_password_request') }}" title="reset_password">Mot de passe oublié ?</a>
+            </div>
+            <br>
+            <br>
         </form>
     </div>
-    <div class="col-12 col-lg-4"></div>
+    <div class="lien_inscription">
+        <h2>Vous n'êtes pas inscrit ? Faite le dès maintenant</h2>
+        <button><span><a href="{{ path('app_register') }}" title="Create account">Register</a></span></button>
+    </div>
     </section>
 {% endblock %}
