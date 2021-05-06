@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+{% block extrastyles %}
+
+{% endblock extrastyles %}
+
     <link rel="icon" href="{{ asset('img/logo.png')}}">
 </head>
 <body>
@@ -19,8 +23,11 @@
     <img src="{{ asset('img/logo.png') }}">
     {% include('nav/nav.html.twig') %}
 </header>
+
 {% block body %}
+
 {%  endblock body %}
+
 
 <footer>
     <div>&copy; {{ "now"|date('h:i:s-d/m/Y') }} Series!</div>

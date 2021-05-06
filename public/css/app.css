@@ -8,7 +8,7 @@ body {
     font-family: 'Zen Dots', serif;
     background-size: cover;
     background-position: center center;
-   background-image: url("bar.jpg");
+   background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("randonneee.jpg");
 
 
 }
@@ -83,4 +83,53 @@ form > div > div {
     display:flex;
     flex-flow: row wrap;
     justify-content: space-around;
+}
+
+/*.bouton_enregistrer_sortie{
+    display: flex;
+    flex-flow: wrap;
+    /*justify-content: space-around;
+}*/
+
+button {
+    display: inline-block;
+    background-color: #7b38d8;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: #eeeeee;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 350px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+button:hover {
+    background-color: #f7c2f9;
+}
+button:hover span {
+    padding-right: 25px;
+}
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+label {
+    display: block;
 }
