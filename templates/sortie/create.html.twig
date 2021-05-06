@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         Campus : {{ app.user.campus.nom }}
-                        {{ form_row(sortieForm.ville) }}
+                        {{ form_row(sortieForm.ville) }} <a href="{{ path('villes_add') }}">Ajouter une ville</a>
                         {{ form_row(sortieForm.lieu) }}
                         <label>Rue :</label><br>
                         <label>Code postal :</label><br>
