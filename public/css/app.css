@@ -48,16 +48,11 @@ header img {
 main {
     flex: 1;
 }
-
 nav ul {
-    float: right;
+    float: inherit;
     display: flex;
     list-style: none;
     padding-left: 0;
-}
-
-nav li {
-    margin-right: 1rem;
 }
 nav li {
     display: flex;
@@ -175,10 +170,15 @@ label {
     display:flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    text-align: center;
 }
 
 .admin_controller2{
     display:flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    text-align: center;
+}
+.barre_navigation_admin {
+    text-align: center;
 }
