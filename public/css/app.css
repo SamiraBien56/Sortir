@@ -52,10 +52,17 @@ main {
 nav ul {
     display: flex;
     list-style: none;
-    padding-left: 0;
+    padding-left: 10px;
+    width: 20%;
+    text-align: left;
+    border-radius: 10px;
+    position: fixed;
+    right: 10px;
+    float: right;
 }
 
 nav li {
+    display: flex;
     margin-right: 1rem;
 }
 
@@ -132,4 +139,8 @@ button:hover span:after {
 
 label {
     display: block;
+}
+
+.titre_acceuil {
+    text-align: center;
 }

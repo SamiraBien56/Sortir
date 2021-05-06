@@ -2,6 +2,8 @@
 {% block title %}Sortir{% endblock %}
 {% block body %}
 
+    <div class="titre_acceuil"><h1>On va faire quoi aujourd'hui ?</h1></div>
+
     <section class="container">
         <div class="row">
             <div class="col-12 col-lg-8"></div>
@@ -12,7 +14,7 @@
         </div>
         <h4>Filtrer les sorties</h4>
         {{ form_start(filterForm) }}
-        <div class="row">
+        <div class="row2">
 
             <div class="col-12 col-lg-5">
                 {{ form_row(filterForm.campus) }}
