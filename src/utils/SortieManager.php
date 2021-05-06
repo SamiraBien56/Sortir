@@ -28,16 +28,22 @@ class SortieManager
 
     public function getSortiesByCampus($idCampus, $idUser)
     {
+        $monthAfter = new \DateTime('+5 weeks');
+        $monthAgo = new \DateTime('1 month ago');
         $sortiesByCampus = $this->entityManager->createQuery(
             'SELECT sortie FROM App\Entity\Sortie sortie
             LEFT JOIN sortie.campus campus
             LEFT JOIN sortie.etat etat
             LEFT JOIN sortie.organisateur organisateur
-            WHERE campus.id LIKE :idCampus AND etat.id=2 OR etat.id=3 OR etat.id=4
-            OR organisateur.id LIKE :idUser'
+            WHERE campus.id LIKE :idCampus
+            AND etat.id=2 OR etat.id=3 OR etat.id=4 OR etat.id=5
+            OR organisateur.id LIKE :idUser
+            '
         )
             ->setParameter('idCampus', $idCampus)
-            ->setParameter('idUser', $idUser);
+            ->setParameter('idUser', $idUser)
+
+        ;
         $allSorties = $sortiesByCampus->getResult();
         return $allSorties;
     }
@@ -72,10 +78,11 @@ class SortieManager
 
     public function majEtatSorties() {
         $jour = new \DateTime();
+        $monthAgo = new \DateTime('1 month ago');
         $sorties = $this->entityManager->createQuery(
             'SELECT sortie FROM App\Entity\Sortie sortie
             LEFT JOIN sortie.etat etat
-            WHERE etat.id=2 OR etat.id=3 or etat.id=4');
+            WHERE etat.id=2 OR etat.id=3 or etat.id=4 or etat.id=5');
         $res = $sorties->getResult();
         foreach ($res as $sortie) {
             if($sortie->getDateLimiteInscription() < $jour){
@@ -84,6 +91,10 @@ class SortieManager
                 if ($sortie->getDateHeureDebut() < $jour->add(date_interval_create_from_date_string('1 day'))){
                     $etat = $this->etatRepository->find(5);
                     $sortie->setEtat($etat);
+                    if ($sortie->getDateHeureDebut() < $monthAgo) {
+                        $etat = $this->etatRepository->find(7);
+                        $sortie->setEtat($etat);
+                    }
                 }
             }
             $this->entityManager->flush();
