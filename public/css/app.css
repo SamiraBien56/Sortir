@@ -156,3 +156,14 @@ label {
     flex-flow: row wrap;
     justify-content: space-around;
 }
+
+.register{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+.register_title{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
