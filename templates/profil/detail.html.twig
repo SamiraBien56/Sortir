@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Participant :  {{ profil.prenom }} {{ profil.nom }}{% endblock %}
+
+{% block body %}
+    <div class="grix xs4 container">
+        <div class="col-xs4">
+            <h1>Participant : {{ profil.prenom }} {{ profil.nom }}</h1>
+        </div>
+        <img src="{{ asset('img/' ~ profil.image) }}">
+        <div>
+            <label class="col-xs1">Nom :</label>
+            <span class="col-xs3" >{{ profil.nom }}</span>
+        </div>
+        <div>
+            <label class="col-xs1">Prénom :</label>
+            <span class="col-xs3" >{{ profil.prenom }}</span>
+        </div>
+        <div>
+            <label class="col-xs1">Email :</label>
+            <span class="col-xs3" >{{ profil.mail }}</span>
+        </div>
+        <div>
+            <label class="col-xs1">Numéro :</label>
+            <span class="col-xs3" >{{ profil.telephone }}</span>
+        </div>
+        <div>
+            <label class="col-xs1">Campus :</label>
+            <span class="col-xs3" >{{ profil.campus.nom }}</span>
+        </div>
+    </div>
+{% endblock %}

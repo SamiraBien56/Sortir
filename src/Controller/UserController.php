@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\EditProfilType;
+use App\Repository\ParticipantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,5 +43,18 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/user/profil/{id}", name = "profil_detail")
+     */
+    public function detailProfil(int $id, ParticipantRepository $participantRepository): Response
+    {
+        $profil = $participantRepository->find($id);
+        return $this->render('profil/detail.html.twig', [
+            "profil"=> $profil
+        ]);
+
+    }
+
 
 }
