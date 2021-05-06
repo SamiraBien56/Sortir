@@ -21,6 +21,7 @@
                 {{ form_row(filterForm.dateMax) }}
             </div>
             <div class="col-12 col-lg-5">FILTRE CHECKBOX</div>
+
             <div class="col-12 col-lg-2"><button class="btn btn-success" type="submit">Rechercher</button> </div>
 
         </div>
@@ -63,8 +64,7 @@
                                 {%  if sortie.etat.libelle == "Créée" %}
                                     <div>Modifier - <a href="{{ path('sortie_publier',{'id': sortie.id})}}" title="Publier ">Publier</a></div>
                                 {%  elseif sortie.etat.libelle == "Ouverte" %}
-                                  <div> <a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a></div>
-                                    <div>- <a href="{{ path('sortie_annuler',{'id': sortie.id})}}" title="Annuler ">Annuler</a></div>
+                                  <div> <a href="{{ path('sortie_afficher',{'id': sortie.id})}}" title="Afficher ">Afficher</a> - <a href="{{ path('sortie_annuler',{'id': sortie.id})}}" title="Annuler ">Annuler</a></div>
                                 {% endif %}
 
 
@@ -86,8 +86,8 @@
                                             {% endif %}
                                         </div>
                                     {% endif %}
-                                {% else %}
-                                    <div> en chantier</div>
+                                {% elseif sortie.etat.id == 6 and sortie.etat.id == 7 %}
+                                    <div> </div>
                                 {% endif %}
 
                             {% endif%}
