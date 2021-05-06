@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Form\EditProfilType;
 use App\Repository\ParticipantRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class UserController extends AbstractController
 {
@@ -55,6 +58,5 @@ class UserController extends AbstractController
         ]);
 
     }
-
 
 }
