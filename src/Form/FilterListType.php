@@ -33,12 +33,12 @@ class FilterListType extends AbstractType
             ->add('dateMin', DateType::class, [
                 'label' => 'Entre',
                 'html5'=> 'true',
-//                'widget' => 'single_text'
+                'widget' => 'single_text'
             ])
             ->add('dateMax', DateType::class, [
                 'label' => 'Et',
                 'html5'=> 'true',
-//                'widget' => 'single_text'
+                'widget' => 'single_text'
             ])
             ->add('organisateur', CheckboxType::class, [
                 'label' => "Sorties dont je suis l'organisateur",
