@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="container">
+        <div class="row">
+            <h1>Modifier une sortie </h1>
+            <div class="col-12 col-lg-2"></div>
+            <div class="col-12 col-lg-8">
+                {{ form_start(sortieForm) }}
+                <div class="creation_sortie">
+                    <div class="col-12 col-lg-6">
+                        {{ form_row(sortieForm.nom) }}
+                        {{ form_row(sortieForm.dateHeureDebut) }}
+                        {{ form_row(sortieForm.dateLimiteInscription) }}
+                        {{ form_row(sortieForm.nbInsriptionsMax) }}
+                        {{ form_row(sortieForm.duree) }}
+                        {{ form_row(sortieForm.infosSortie) }}
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        Campus : {{ app.user.campus.nom }}
+                        {{ form_row(sortieForm.ville) }}
+                        <button><a href="{{ path('villes_add') }}"><span>Ajouter une ville</span></a></button>
+                        {{ form_row(sortieForm.lieu) }}
+                        <button><a href="{{ path('lieux_add') }}"><span>Ajouter un lieu</span></a></button>
+                        <label>Rue :</label><br>
+                        <label>Code postal :</label><br>
+                        <label>Latitude :</label><br>
+                        <label>Longitude :</label><br>
+                    </div>
+                </div>
+
+                <div class="bouton_enregistrer_sortie">
+                    <button class="btn btn-success"><span>Enregistrer</span></button>
+                    {{ form_end(sortieForm) }}
+                </div>
+            </div>
+            <div class="col-12 col-lg-2"></div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+    Créer une sortie |{{ parent() }}
+{% endblock %}
+
+{% block extrastyles %}
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('css/bar.jpg') }}");
+        }
+    </style>
+{% endblock %}
