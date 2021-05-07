@@ -196,3 +196,19 @@ label {
     border-radius: 15px;
     box-shadow: 0 9px #999;
 }
+
+.check_box{
+    float: right;
+    display: inline-block;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+}
+.rechercheFiltre{
+    float: left;
+    display: inline-block;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+}
+
