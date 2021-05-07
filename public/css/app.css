@@ -48,19 +48,12 @@ header img {
 main {
     flex: 1;
 }
-
 nav ul {
+    float: inherit;
     display: flex;
     list-style: none;
-    padding-left: 0px;
-    width: 20%;
-    text-align: left;
-    border-radius: 10px;
-    position: fixed;
-    right: 0px;
-    float: right;
+    padding-left: 0;
 }
-
 nav li {
     display: flex;
     margin-right: 1rem;
@@ -137,7 +130,7 @@ button:hover span:after {
     right: 0;
 }
 
-input {
+label {
     display: block;
 }
 
@@ -167,6 +160,43 @@ input {
     flex-flow: row wrap;
     justify-content: space-around;
 }
+
+.photo_profil{
+    width: 150px;
+    height: 150px;
+}
+
+.admin_controller{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.admin_controller2{
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+.barre_navigation_admin {
+    text-align: center;
+}
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
 .check_box{
     float: right;
     display: inline-block;
@@ -181,7 +211,4 @@ input {
     justify-content: space-around;
 
 }
-#organisateur {
-    display: inline;
 
-}
