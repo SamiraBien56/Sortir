@@ -2,27 +2,23 @@
 
 namespace App\Form;
 
-use App\Entity\Campus;
-use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 
 
 use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
-use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLoader;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
 class CreerUneSortieType extends AbstractType
 {
@@ -61,16 +57,52 @@ class CreerUneSortieType extends AbstractType
                 'choice_label'=>'nom',
                 'label'=>'Ville :'
                 ])
-
-            ->add('lieu', EntityType::class,[
-                'class'=>Lieu::class,
-                'choice_label'=>'nom',
-                'label'=>'Lieu :'
-            ])
-
-
+            ->get('ville')->addEventListener(
+                FormEvents::POST_SUBMIT,
+                function (FormEvent $event) {
+                    $form = $event->getForm();
+                    $this->addLieuField($form->getParent(), $form->getData());
+                }
+            );
+            $builder->addEventListener(
+                FormEvents::POST_SET_DATA,
+                function (FormEvent $event) {
+                    $data = $event->getData();
+                    /* @var $lieu Lieu */
+                    $lieu = $data->getLieu();
+                    $form = $event->getForm();
+                    if ($lieu) {
+                        // On récupère la ville
+                        $ville = $lieu->getVille();
+                        // On crée les 1 champs supplémentaires
+                        $this->addLieuField($form, $ville);
+                        // On set les données
+                        $form->get('ville')->setData($ville);
+                    } else {
+                        // On crée le champs en les laissant vide (champs utilisé pour le JavaScript)
+                        $this->addLieuField($form, null);
+                    }
+                }
+            )
         ;
     }
+    private function addLieuField(FormInterface $form, ?Ville $ville)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'lieu',
+            EntityType::class,
+            null,
+            [
+                'class'           => 'App\Entity\Lieu',
+                'placeholder'     => $ville ? 'Sélectionnez votre ville' : 'Sélectionnez votre lieu',
+                'auto_initialize' => false,
+                'choices'         => $ville ? $ville->getLieux() : [],
+                'choice_label'    => 'nom'
+            ]
+        );
+        $form->add($builder->getForm());
+    }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

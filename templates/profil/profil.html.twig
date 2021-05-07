@@ -13,23 +13,16 @@
         <div class="col-xs4">
             <h1>Données personnelles de {{ app.user.prenom }} {{ app.user.nom }}</h1>
         </div>
-        <img src="{{ asset('img/' ~ app.user.image) }}">
-        <div>
-        <label class="col-xs1">Nom :</label>
-        <span class="col-xs3" >{{ app.user.nom }}</span>
-        </div>
-        <div>
-        <label class="col-xs1">Prénom :</label>
-        <span class="col-xs3" >{{ app.user.prenom }}</span>
-        </div>
-        <div>
-        <label class="col-xs1">Email :</label>
-        <span class="col-xs3" >{{ app.user.mail }}</span>
-        </div>
-        <div>
-        <label class="col-xs1">Numéro :</label>
-        <span class="col-xs3" >{{ app.user.telephone }}</span>
-        </div>
+        <img class="photo_profil" src="{{ asset('img/' ~ app.user.image) }}">
+        <br>
+        <div><label class="col-xs1">Nom : {{ app.user.nom }}</label></div>
+        <br>
+        <div><label class="col-xs1">Prénom : {{ app.user.prenom }}</label></div>
+        <br>
+        <div><label class="col-xs1">Email : {{ app.user.mail }}</label></div>
+        <br>
+        <div><label class="col-xs1">Numéro : {{ app.user.telephone }}</label></div>
+        <br>
         <div class="col-xs4">
             <button> <a href="{{ path('profil_editProfil') }}" class="btn btn-success">Modifier</a></button>
             <button><a href="{{ path('delete_user', {'id': app.user.id})  }}" class="btn btn-danger">Supprimer</a></button>
