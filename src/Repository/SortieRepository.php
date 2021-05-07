@@ -19,32 +19,58 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    // /**
-    //  * @return Sortie[] Returns an array of Sortie objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    /**
+     * @return Sortie[]
+     */
+    public function findSearch(Sortie $search):array
+    { $jour = new \DateTime();
 
-    /*
-    public function findOneBySomeField($value): ?Sortie
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $this
+            ->createQueryBuilder('s')
+            ->select( 's', 's.participants');
+
+
+
+        if(!empty($search->nom)){
+            $query=$query
+                ->andWhere('s.nom LIKE :nom' )
+                ->setParameter('nom',"%{$search->nom}%");
+
+        }
+        if(!empty($search->dateMin)){
+            $query=$query
+                ->andWhere('s.dateHeureDebut >= dateMin' )
+                ->setParameter('dateMin',$search->dateMin);
+
+        }
+        if(!empty($search->dateMax)){
+            $query=$query
+                ->andWhere('s.dateHeureDebut >= dateMax' )
+                ->setParameter('dateMax',$search->dateMax);
+
+        }
+        if(!empty($search->organisateur)){
+            $query=$query
+                ->andWhere('s.organisateur = userId' )
+                ->setParameter('userId',$search->getParticipants());;
+
+
+        }
+        if(!empty($search->dateHeureDebut)){
+            $query=$query
+                ->andWhere('s.dateHeureDebut > jour' )
+                ->setParameter('jour',$jour->format('Y-d-m'));;
+
+
+        }
+        if(!empty($search->campus)){
+            $query=$query
+                ->andWhere('s.campus LIKE campus' )
+                ->setParameter('campus',$search->campus);;
+
+
+        }
+
+        return $query->getQuery()->getResult();
     }
-    */
 }

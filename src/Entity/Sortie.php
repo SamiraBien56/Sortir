@@ -22,12 +22,12 @@ class Sortie
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $nom;
+    public $nom;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateHeureDebut;
+    public $dateHeureDebut;
 
     /**
      * @ORM\Column(type="time")
@@ -70,12 +70,12 @@ class Sortie
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
      */
-    private $campus;
+    public $campus;
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sorties")
      */
-    private $organisateur;
+    public $organisateur;
 
     /**
      * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="inscriptions")
