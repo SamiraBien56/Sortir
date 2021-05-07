@@ -216,3 +216,8 @@ input {
     display: inline;
     float: right;
 }
+
+.tr_participant{
+    text-align: center;
+}
+

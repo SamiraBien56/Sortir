@@ -93,6 +93,7 @@ class AdminController extends AbstractController
                 $participant,
                 $participant->getPrenom() . $participant->getNom()
             )
+
         );
 
         if ($formAddParticipant->isSubmitted() && $formAddParticipant->isValid()) {
