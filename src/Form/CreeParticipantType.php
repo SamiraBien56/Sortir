@@ -33,11 +33,6 @@ class CreeParticipantType extends AbstractType
         ->add('telephone')
         ->add('mail')
 
-        ->add('image', FileType::class, [
-            'label' => false,
-            'mapped' => false,
-            'required' => false
-        ])
         ;
 }
 

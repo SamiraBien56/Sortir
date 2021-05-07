@@ -10,6 +10,7 @@ use App\utils\SortieManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,6 +71,9 @@ class AdminController extends AbstractController
         $participant->setAdministrateur(0);
         $participant->setActif(1);
         $participant->setRoles(["ROLE_USER"]);
+
+
+        //$participant->setImage('$fichier');
         $participant->setPassword(
             $passwordEncoder->encodePassword(
                 $participant,
@@ -90,6 +94,10 @@ class AdminController extends AbstractController
         return $this->render('admin/creeParticipant.html.twig', [
             'formAddParticipant' => $formAddParticipant->createView()
         ]);
+    }
+
+    public function supprimerParticipant(){
+
     }
 
 }
