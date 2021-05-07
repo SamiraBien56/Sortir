@@ -2,9 +2,11 @@
 {% block title %}Sortir{% endblock %}
 {% block body %}
 
-    <div class="titre_acceuil"><h1>On va faire quoi aujourd'hui ?</h1></div>
+
 
     <section class="container">
+        <div class="titre_acceuil"><h1>On va faire quoi aujourd'hui ?</h1></div>
+
         <div class="row">
             <div class="col-12 col-lg-8"></div>
             <div class="col-12 col-lg-4">Date du jour : {{ "now"|date("d/m/Y") }}<br>
@@ -12,21 +14,29 @@
                 Participant : {{ app.user.pseudo }}
             {% endif %}</div>
         </div>
-        <h4>Filtrer les sorties</h4>
+        <div>
+        <h4 style="text-align: center">Filtrer les sorties</h4>
         {{ form_start(filterForm) }}
         <div class="row2">
-
-            <div class="col-12 col-lg-5">
+            <div class="rechercheFiltre">
                 {{ form_row(filterForm.campus) }}
                 {{ form_row(filterForm.nom) }}
                 {{ form_row(filterForm.dateMin) }}
                 {{ form_row(filterForm.dateMax) }}
             </div>
-            <div class="col-12 col-lg-5">FILTRE CHECKBOX</div>
-            <div class="col-12 col-lg-2"><button class="btn btn-success" type="submit"><span>Rechercher</span></button> </div>
 
+            <div class="check_box">
+            <div >FILTRE CHECKBOX</div>
+            {{ form_row(filterForm.organisateur) }}
+            {{ form_row(filterForm.inscrit) }}
+            {{ form_row(filterForm.nonInscrit) }}
+            {{ form_row(filterForm.dateHeureDebut) }}
+
+            <div class="col-12 col-lg-2"><button class="btn btn-success" type="submit"><span>Rechercher</span></button> </div>
+            </div>
         </div>
         {{ form_end(filterForm) }}
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
