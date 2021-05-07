@@ -24,8 +24,8 @@ class SortieRepository extends ServiceEntityRepository
      */
     public function search($idUser, $idCampus, $nom, $dateMin, $dateMax, $organisateur, $dateHeureDebut, $inscrit, $nonInscrit)
     {
-        $dateM = new \DateTime(implode('-', $dateMin));
-        $dateMa = new \DateTime(implode('-', $dateMax));
+        //$dateM = new \DateTime(implode('-', $dateMin));
+        //$dateMa = new \DateTime(implode('-', $dateMax));
 
         $jour = new \DateTime();
         $query = $this
@@ -42,12 +42,12 @@ class SortieRepository extends ServiceEntityRepository
         if ($dateMin != null) {
             $query = $query
                 ->andWhere('sortie.dateHeureDebut >= :dateMin')
-                ->setParameter('dateMin', $dateM->format('Y-d-m'));
+                ->setParameter('dateMin', $dateMin);
         }
         if ($dateMax != null) {
             $query = $query
                 ->andWhere('sortie.dateHeureDebut <= :dateMax')
-                ->setParameter('dateMax', $dateMa->format('Y-d-m'));
+                ->setParameter('dateMax', $dateMax);
         }
         if ($organisateur != null) {
             $query = $query
