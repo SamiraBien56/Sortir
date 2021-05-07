@@ -23,9 +23,16 @@
                 <td>{{ participant.nom }}</td>
                 <td>{{ participant.mail }}</td>
 
-                <td> <div><a href="{{ path('admin_desactiverParticipant',{'id': participant.id})}}" title="desactiver ">Désactiver</a> -
-                        <a href="#" title="supprimer ">Supprimer</a></div>
+                </td>
+                <td>
+                    {% if participant.actif == 1 %}
+                 <div><a href="{{ path('admin_desactiverParticipant',{'id': participant.id})}}" title="desactiver ">Désactiver</a> -
+                        <a href="{{ path('admin_admin_supprimerParticipant',{'id': participant.id})}}"title="supprimer ">Supprimer</a></div>
+                    {% else %}
+                        <div><a href="{{ path('admin_reactiverParticipant',{'id': participant.id})}}" title="reactiver ">Réactiver</a> -
+                            <a href="{{ path('admin_admin_supprimerParticipant',{'id': participant.id})}}"title="supprimer ">Supprimer</a></div>
 
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

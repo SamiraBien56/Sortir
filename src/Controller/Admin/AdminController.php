@@ -136,13 +136,18 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_admin_listParticipant')
         ;
     }
+
+    /**
+     * Réactiver des participant
+     * @Route("/reactiverParticipant/{id}", name="reactiverParticipant")
+     */
     public function reactiverParticipant(int $id, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository){
 
         $participant = $participantRepository->find($id);
         $participant->setActif(1);
         $entityManager->flush();
 
-        $this->addFlash('success', "L'utilisateur a bien été désactivé");
+        $this->addFlash('success', "L'utilisateur a bien été réactivé");
         return $this->redirectToRoute('admin_admin_listParticipant')
             ;
     }
@@ -154,7 +159,20 @@ class AdminController extends AbstractController
     public function supprimerParticipant(int $id, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository){
 
         $participant = $participantRepository->find($id);
-        $participant->remove($participant);
+
+        $toutesInscriptions =$participant ->getInscriptions();
+
+        foreach ($toutesInscriptions as $inscription){
+        $participant->removeInscription($inscription);
+        }
+
+        $touteSorties= $participant->getSorties();
+        foreach ($touteSorties as $sorty){
+            $participant->removeSorty($sorty);
+        }
+
+        $entityManager->remove($participant);
+
         $entityManager->flush();
         $this->addFlash('success', "L'utilisateur a bien été supprimé");
         return $this->redirectToRoute('admin_admin_listParticipant')

@@ -68,10 +68,15 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         }
 
         $user = $this->entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $credentials['pseudo']]);
-
+        $actif = $user-> getActif();
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Pseudo could not be found.');
+        }
+        if ($actif == 0){
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('Votre compte est désactiver vous avez surement fait une bêtise.');
+
         }
 
         return $user;
