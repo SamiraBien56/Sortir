@@ -214,4 +214,5 @@ input {
 
 #organisateur, #inscrit, #nonInscrit, #dateHeureDebut {
     display: inline;
+    float: right;
 }
