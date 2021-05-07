@@ -137,7 +137,7 @@ button:hover span:after {
     right: 0;
 }
 
-label {
+input {
     display: block;
 }
 
@@ -166,4 +166,22 @@ label {
     display:flex;
     flex-flow: row wrap;
     justify-content: space-around;
+}
+.check_box{
+    float: right;
+    display: inline-block;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+}
+.rechercheFiltre{
+    float: left;
+    display: inline-block;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+}
+#organisateur {
+    display: inline;
+
 }
