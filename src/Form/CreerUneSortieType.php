@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Lieu;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 
 
@@ -57,39 +58,52 @@ class CreerUneSortieType extends AbstractType
             ->add('infosSortie', TextType::class,[
                 'label'=>'Description et infos'
             ] )
+            ->add('participants', EntityType::class, [
+                'class' => Participant::class,
+                'multiple' => true,
+                'choice_label' => 'pseudo',
+                'label' => 'Choisir les participants : '
+
+            ])
             ->add('ville', EntityType::class,[
                 'class'=>Ville::class,
                 'choice_label'=>'nom',
                 'label'=>'Ville :'
                 ])
-            ->get('ville')->addEventListener(
-                FormEvents::POST_SUBMIT,
-                function (FormEvent $event) {
-                    $form = $event->getForm();
-                    $this->addLieuField($form->getParent(), $form->getData());
+            ->add('lieu', EntityType::class,[
+                'class'=>Lieu::class,
+                'choice_label'=>'nom',
+                'label'=>'Lieu :'
+            ]);
+
+        /*->get('ville')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                $this->addLieuField($form->getParent(), $form->getData());
+            }
+        );
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event) {
+                $data = $event->getData();
+                 @var $lieu Lieu
+                $lieu = $data->getLieu();
+                $form = $event->getForm();
+                if ($lieu) {
+                    // On récupère la ville
+                    $ville = $lieu->getVille();
+                    // On crée les 1 champs supplémentaires
+                    $this->addLieuField($form, $ville);
+                    // On set les données
+                    $form->get('ville')->setData($ville);
+                } else {
+                    // On crée le champs en les laissant vide (champs utilisé pour le JavaScript)
+                    $this->addLieuField($form, null);
                 }
-            );
-            $builder->addEventListener(
-                FormEvents::POST_SET_DATA,
-                function (FormEvent $event) {
-                    $data = $event->getData();
-                    /* @var $lieu Lieu */
-                    $lieu = $data->getLieu();
-                    $form = $event->getForm();
-                    if ($lieu) {
-                        // On récupère la ville
-                        $ville = $lieu->getVille();
-                        // On crée les 1 champs supplémentaires
-                        $this->addLieuField($form, $ville);
-                        // On set les données
-                        $form->get('ville')->setData($ville);
-                    } else {
-                        // On crée le champs en les laissant vide (champs utilisé pour le JavaScript)
-                        $this->addLieuField($form, null);
-                    }
-                }
-            )
-        ;
+            }
+        )
+    ;*/
     }
     private function addLieuField(FormInterface $form, ?Ville $ville)
     {

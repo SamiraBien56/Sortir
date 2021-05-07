@@ -18,13 +18,14 @@
                     <div class="col-12 col-lg-6">
                         Campus : {{ app.user.campus.nom }}
                         {{ form_row(sortieForm.ville) }}
-                        <button type="button"><a href="{{ path('villes_add') }}" ><span>Ajouter une ville</span></a></button>
+                        <button type="button"><a href="{{ path('villes_add') }}"><span>Ajouter une ville</span></a></button>
                         {{ form_row(sortieForm.lieu) }}
-                        <button type="button"><a href="{{ path('lieux_add') }}" type="button"><span>Ajouter un lieu</span></a></button>
+                        <button type="button"><a href="{{ path('lieux_add') }}"><span>Ajouter un lieu</span></a></button><br>
                         <label>Rue :</label><br>
                         <label>Code postal :</label><br>
                         <label>Latitude :</label><br>
                         <label>Longitude :</label><br>
+                        {{ form_row(sortieForm.participants) }}
                     </div>
                 </div>
                 <div class="bouton_enregistrer_sortie">
