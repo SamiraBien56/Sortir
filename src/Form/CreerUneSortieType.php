@@ -34,11 +34,16 @@ class CreerUneSortieType extends AbstractType
                 'input'=>'datetime',
                 'html5' => true,
                 'widget' => 'single_text',
+                'data'   => new \DateTime(),
+                'attr'   => ['min' => (new \DateTime())->format('Y-m-d H:i:s')]
             ])
             ->add('dateLimiteInscription', DateType::class, [
                 'label' => "Date limite d'inscription",
                 'html5' => true,
                 'widget' => 'single_text',
+                'data'   => new \DateTime(),
+                'attr'   => ['min' => (new \DateTime())->format('Y-m-d H:i:s')]
+
             ])
             ->add('nbInsriptionsMax', IntegerType::class,[
                 'label'=>'Nombre de places'

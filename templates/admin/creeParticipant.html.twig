@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Ajouter un utilisateur{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col">
+                <h3 class="register_title">Ajouter un utilisateur</h3>
+                <hr>
+            </div>
+        </div>
+        <div class="register">
+        {{ form_start(formAddParticipant) }}
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.pseudo) }}
+            </div>
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.nom) }}
+            </div>
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.prenom) }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.mail) }}
+            </div>
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.telephone) }}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.campus) }}
+            </div>
+
+            <div class="col-12 col-lg-4">
+                {{ form_row(formAddParticipant.image) }}
+            </div>
+
+            <div class="col-12 col-lg-4">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <button class="btn btn-success" type="submit">Ajouter un utilisateur</button>
+            </div>
+        </div>
+        {{ form_end(formAddParticipant) }}
+    </div>
+
+
+    </div>
+{% endblock %}
