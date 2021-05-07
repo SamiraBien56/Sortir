@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Participant;
 use App\Form\CreeParticipantType;
 use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\utils\SortieManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -96,8 +97,55 @@ class AdminController extends AbstractController
         ]);
     }
 
-    public function supprimerParticipant(){
 
+    /**
+     * list des participant
+     * @Route("/listParticipant", name="admin_listParticipant")
+     */
+    public function selectParticipant(ParticipantRepository $participantRepository,EntityManagerInterface $entityManager){
+        $listAllParticipant = $participantRepository->findAll();
+        return $this->render('admin/listParticipant.html.twig',[
+            'listParticipants'=>$listAllParticipant
+        ]);
+
+    }
+    /**
+     * désactiver des participant
+     * @Route("/desactiverParticipant/{id}", name="desactiverParticipant")
+     */
+    public function desactiverParticipant(int $id, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository){
+
+        $participant = $participantRepository->find($id);
+        $participant->setActif(0);
+        $entityManager->flush();
+
+        $this->addFlash('success', "L'utilisateur a bien été désactivé");
+        return $this->redirectToRoute('admin_admin_listParticipant')
+        ;
+    }
+    public function reactiverParticipant(int $id, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository){
+
+        $participant = $participantRepository->find($id);
+        $participant->setActif(1);
+        $entityManager->flush();
+
+        $this->addFlash('success', "L'utilisateur a bien été désactivé");
+        return $this->redirectToRoute('admin_admin_listParticipant')
+            ;
+    }
+
+    /**
+     * désactiver des participant
+     * @Route("/supprimerParticipant/{id}", name="admin_supprimerParticipant")
+     */
+    public function supprimerParticipant(int $id, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository){
+
+        $participant = $participantRepository->find($id);
+        $participant->remove($participant);
+        $entityManager->flush();
+        $this->addFlash('success', "L'utilisateur a bien été supprimé");
+        return $this->redirectToRoute('admin_admin_listParticipant')
+            ;
     }
 
 }
