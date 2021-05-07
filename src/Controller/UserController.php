@@ -37,9 +37,10 @@ class UserController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $images = $form->get('image')->getData();
-            if($images == true){
-                $fichier = md5(uniqid()).'.'.$images->guessExtension();
+            if($images == true) {
+                $fichier = md5(uniqid()) . '.' . $images->guessExtension();
                 $user->setImage($fichier);
+
                 $images->move(
                     $this->getParameter('images_directory'),
                     $fichier);

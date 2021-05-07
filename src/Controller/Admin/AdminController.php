@@ -58,6 +58,19 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/sorties/activer/{id}", name="sorties_activer")
+     */
+    public function activer($id, SortieRepository $sortieRepository, EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $etat = $etatRepository->find(1);
+        $sortie->setEtat($etat);
+        $entityManager->flush();
+        $this->addFlash('success', 'La sortie a bien été activée');
+        return $this->redirectToRoute('admin_sorties');
+    }
+
+    /**
      * Créer un Participant
      * @Route("/creerParticipant", name="admin_creerParticipant")
      */
