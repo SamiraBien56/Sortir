@@ -62,8 +62,6 @@ class AdminController extends AbstractController
     public function addUser(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
 
-        // traiter le formulaire utilisateur
-
         $participant = new Participant();
         $formAddParticipant = $this->createForm(CreeParticipantType::class, $participant, ['form_action' => 'addUser']);
         $formAddParticipant->handleRequest($request);
