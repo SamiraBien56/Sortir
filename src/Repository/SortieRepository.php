@@ -22,55 +22,59 @@ class SortieRepository extends ServiceEntityRepository
     /**
      * @return Sortie[]
      */
-    public function findSearch(Sortie $search):array
-    { $jour = new \DateTime();
+    public function search($idUser, $idCampus, $nom, $dateMin, $dateMax, $organisateur, $dateHeureDebut, $inscrit, $nonInscrit)
+    {
+        $dateM = new \DateTime(implode('-', $dateMin));
+        $dateMa = new \DateTime(implode('-', $dateMax));
 
+        $jour = new \DateTime();
         $query = $this
-            ->createQueryBuilder('s')
-            ->select( 's', 's.participants');
-
-
-
-        if(!empty($search->nom)){
-            $query=$query
-                ->andWhere('s.nom LIKE :nom' )
-                ->setParameter('nom',"%{$search->nom}%");
-
+            ->createQueryBuilder('sortie')
+            ->select('sortie')
+            ->leftJoin('sortie.campus', 'campus')
+            ->leftJoin('sortie.organisateur', 'organisateur')
+            ->leftJoin('sortie.participants', 'participant');
+        if ($nom != null) {
+            $query = $query
+                ->andWhere('sortie.nom LIKE :nom')
+                ->setParameter('nom', "%{$nom}%");
         }
-        if(!empty($search->dateMin)){
-            $query=$query
-                ->andWhere('s.dateHeureDebut >= dateMin' )
-                ->setParameter('dateMin',$search->dateMin);
-
+        if ($dateMin != null) {
+            $query = $query
+                ->andWhere('sortie.dateHeureDebut >= :dateMin')
+                ->setParameter('dateMin', $dateM->format('Y-d-m'));
         }
-        if(!empty($search->dateMax)){
-            $query=$query
-                ->andWhere('s.dateHeureDebut >= dateMax' )
-                ->setParameter('dateMax',$search->dateMax);
-
+        if ($dateMax != null) {
+            $query = $query
+                ->andWhere('sortie.dateHeureDebut <= :dateMax')
+                ->setParameter('dateMax', $dateMa->format('Y-d-m'));
         }
-        if(!empty($search->organisateur)){
-            $query=$query
-                ->andWhere('s.organisateur = userId' )
-                ->setParameter('userId',$search->getParticipants());;
-
-
+        if ($organisateur != null) {
+            $query = $query
+                ->andWhere('organisateur.id = :idUser')
+                ->setParameter('idUser', $idUser);
         }
-        if(!empty($search->dateHeureDebut)){
-            $query=$query
-                ->andWhere('s.dateHeureDebut > jour' )
-                ->setParameter('jour',$jour->format('Y-d-m'));;
-
-
+        if ($dateHeureDebut != null) {
+            $query = $query
+                ->andWhere('sortie.dateHeureDebut < :jour')
+                ->setParameter('jour', $jour);
         }
-        if(!empty($search->campus)){
-            $query=$query
-                ->andWhere('s.campus LIKE campus' )
-                ->setParameter('campus',$search->campus);;
-
-
+        if ($idCampus != null) {
+            $query = $query
+                ->andWhere('campus.id LIKE :campus')
+                ->setParameter('campus', $idCampus);
         }
-
+        if ($inscrit != null) {
+            $query = $query
+                ->andWhere('participant.id LIKE :idUser')
+                ->setParameter('idUser', $idUser);
+        }
+        /*if ($nonInscrit != null) {
+            $query = $query
+                ->andWhere(':idUser NOT IN participant.id')
+                ->setParameter('idUser', $idUser)
+            ;
+        }*/
         return $query->getQuery()->getResult();
     }
 }
