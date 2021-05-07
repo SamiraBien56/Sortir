@@ -67,6 +67,34 @@ class SortieController extends AbstractController
     }
 
     /**
+     * @Route("/sortie/modifier/{id}", name = "sortie_modifier")
+     */
+    public function modifier(int $id, Request $request, SortieRepository $sortieRepository, SortieManager $sortieManager, EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $user = $this->getUser();
+        $this->getUser();
+
+        $sortieForm = $this ->createForm(CreerUneSortieType::class,$sortie);
+        $sortieForm-> handleRequest($request);
+
+        if($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La sortie a bien été modifiée !!!');
+            return $this-> redirectToRoute('main_home', ['id'=> $sortie->getId()]);
+        }
+
+
+        return $this->render('sortie/modifier.html.twig', [
+            "sortie"=> $sortie,
+            "user"=>$user,
+            "sortieForm" => $sortieForm->createView()
+        ]);
+
+    }
+
+    /**
      * @Route("/sortie/annuler/{id}", name = "sortie_annuler")
      */
     public function annuler(int $id, Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository, EntityManagerInterface $entityManager): Response
