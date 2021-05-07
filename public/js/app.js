@@ -5,8 +5,8 @@ $(document).on('change', '#creer_une_sortie_ville', function () {
     let target = '#' + $field.attr('id').replace('ville', 'lieu')
     // Les données à envoyer en Ajax
     let data = {}
-    data[$villeField.attr('name')] = $villeField.val()
-    data[$field.attr('name')] = $field.val()
+    data[$villeField.attr('nom')] = $villeField.val()
+    data[$field.attr('nom')] = $field.val()
     // On soumet les données
     $.post($form.attr('action'), data).then(function (data) {
         // On récupère le nouveau <select>

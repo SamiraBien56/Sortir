@@ -96,7 +96,8 @@ class CreerUneSortieType extends AbstractType
                 'class'           => 'App\Entity\Lieu',
                 'placeholder'     => $ville ? 'Sélectionnez votre ville' : 'Sélectionnez votre lieu',
                 'auto_initialize' => false,
-                'choices'         => $ville ? $ville->getLieux() : []
+                'choices'         => $ville ? $ville->getLieux() : [],
+                'choice_label'    => 'nom'
             ]
         );
         $form->add($builder->getForm());
