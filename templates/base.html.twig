@@ -25,13 +25,20 @@
     <a href="{{ path('main_home') }}"><img src="{{ asset('img/logo.png') }}"></a>
     {% include('nav/nav.html.twig') %}
 </header>
-
+{# read and display all flash message #}
+{%  for label, messages in app.flashes%}
+    {% for message in messages %}
+        <div class="flash flash-{{  label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 {% block body %}
 
 {%  endblock body %}
 
 <footer>
-    <div>&copy; {{ "now"|date('h:i:s-d/m/Y') }} Series!</div>
+    <div style="text-align: center">&copy; {{ "now"|date('h:i:s-d/m/Y') }} Sortir.com!</div>
 </footer>
 
 </body>
