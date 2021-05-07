@@ -59,7 +59,8 @@ class AdminController extends AbstractController
      * Créer un Participant
      * @Route("/creerParticipant", name="admin_creerParticipant")
      */
-    public function addUser(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder) {
+    public function addUser(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
 
         // traiter le formulaire utilisateur
 
@@ -74,16 +75,16 @@ class AdminController extends AbstractController
         $participant->setPassword(
             $passwordEncoder->encodePassword(
                 $participant,
-                $participant->getPrenom().$participant->getNom()
+                $participant->getPrenom() . $participant->getNom()
             )
         );
 
-        if($formAddParticipant->isSubmitted() && $formAddParticipant->isValid()){
+        if ($formAddParticipant->isSubmitted() && $formAddParticipant->isValid()) {
             //sauvegarder les données dans la base
             $em->persist($participant);
             $em->flush();
             $this->addFlash('success', 'Participant inscrit!');
-            return $this-> redirectToRoute('admin_dashboard');
+            return $this->redirectToRoute('admin_dashboard');
 
 
         }
@@ -93,25 +94,4 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * Désactiver un utilisateur
-     * @Route("/desactiver/{id}", name="utilisateur_desactiver")
-     */
-    public function desactiverUnParticipant(Request $request, EntityManagerInterface $em, $id) {
-
-        $participant= $em->getRepository(Participant::class)->find($id);
-
-        if($participant == null) {
-            throw $this->createNotFoundException('Participant inconnu ');
-        }
-
-        // Setter le champs actif à Zéro pour la table Utilisateur
-        $participant->setActif(0);
-
-        //sauvegarder les données dans la base
-        $em->persist($participant);
-        $em->flush();
-
-        return $this->redirectToRoute('admin_dashboard');
-    }
 }
