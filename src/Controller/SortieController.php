@@ -82,7 +82,7 @@ class SortieController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'La sortie a bien été modifiée !!!');
-            return $this-> redirectToRoute('main_home', ['id'=> $sortie->getId()]);
+            return $this-> redirectToRoute('main_home');
         }
 
 
