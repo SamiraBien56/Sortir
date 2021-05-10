@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col-12 col-lg-8"></div>
-            <div class="col-12 col-lg-4">Date du jour : {{ "now"|date("d/m/Y") }}<br>
+            <div class="col-12 col-lg-4">Date du jour : nous sommes le {{ "now"|date("d/m/Y") }}<br>
             {% if app.user %}
                 Participant : {{ app.user.pseudo }}
             {% endif %}</div>
