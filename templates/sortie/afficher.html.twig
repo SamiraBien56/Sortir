@@ -14,23 +14,23 @@
         <hr>
     </div>
     <div class="row">
-        <div class="col-12 col-lg-5">
-            <div> Nom de la sortie : {{ sortie.nom }}</div>
-            <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date("Y-m-d") }}</div>
-            <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date("Y-m-d")  }}</div>
-            <div> Nombre de places : {{ sortie.nbInsriptionsMax }}</div>
-            <div> Durée : {{ sortie.duree|date("Y-m-d")  }}</div>
-            <div> Description et infos : {{ sortie.infosSortie }}</div>
-        </div>
+        <table>
+            <tr><td>Nom de la sortie :</td><td> {{ sortie.nom }}</td></tr>
+            <tr><td>Date et heure :</td><td>{{ sortie.dateHeureDebut|date("Y-m-d") }}</td></tr>
+            <tr><td>Date limite d'inscription :</td><td>{{ sortie.dateLimiteInscription|date("Y-m-d")  }}</td></tr>
+            <tr><td>Nombre de places :</td><td>{{ sortie.nbInsriptionsMax }}</td></tr>
+            <tr><td>Durée :</td><td>{{ sortie.duree|date("Y-m-d")  }}</td></tr>
+            <tr><td>Description et infos :</td><td>{{ sortie.infosSortie }}</td></tr>
+        </table>
         <hr>
-        <div class="col-12 col-lg-5">
-            <div> Campus : {{ sortie.campus.nom }}</div>
-            <div> Lieu : {{ sortie.lieu.nom }}</div>
-            <div> Rue : {{ sortie.lieu.rue }}</div>
-            <div> Code Postal : {{ sortie.ville.codePostal }}</div>
-            <div> Latitude: {{ sortie.lieu.latitude }}</div>
-            <div> Longitude: {{ sortie.lieu.longitude }}</div>
-        </div>
+        <table>
+            <tr><td>Campus :</td><td>{{ sortie.campus.nom }}</td></tr>
+            <tr><td>Lieu :</td><td>{{ sortie.lieu.nom }}</td></tr>
+            <tr><td>Rue :</td><td>{{ sortie.lieu.rue }}</td></tr>
+            <tr><td>Code Postal :</td><td>{{ sortie.ville.codePostal }}</td></tr>
+            <tr><td>Latitude:</td><td>{{ sortie.lieu.latitude }}</td></tr>
+            <tr><td>Longitude:</td><td>{{ sortie.lieu.longitude }}</td></tr>
+        </table>
     </div>
     <div>
         <hr>
@@ -47,7 +47,7 @@
         {% for participant in listAllParticipants.participants%}
             <tr>
                 <td><a href="{{ path('profil_detail',{'id': participant.id})}}" title="Afficher le profil ">{{ participant.pseudo}}</td>
-                <td>{{ participant.nom}}</td>
+                <td>{{ participant.prenom}} {{ participant.nom}}</td>
             </tr>
         {% endfor %}
 {% endif %}
