@@ -5,29 +5,12 @@
 
 {% block body %}
     <div class="grix xs4 container">
-        <div class="col-xs4">
-            <h1>Participant : {{ profil.prenom }} {{ profil.nom }}</h1>
-        </div>
-        <img src="{{ asset('img/' ~ profil.image) }}">
-        <div>
-            <label class="col-xs1">Nom :</label>
-            <span class="col-xs3" >{{ profil.nom }}</span>
-        </div>
-        <div>
-            <label class="col-xs1">Prénom :</label>
-            <span class="col-xs3" >{{ profil.prenom }}</span>
-        </div>
-        <div>
-            <label class="col-xs1">Email :</label>
-            <span class="col-xs3" >{{ profil.mail }}</span>
-        </div>
-        <div>
-            <label class="col-xs1">Numéro :</label>
-            <span class="col-xs3" >{{ profil.telephone }}</span>
-        </div>
-        <div>
-            <label class="col-xs1">Campus :</label>
-            <span class="col-xs3" >{{ profil.campus.nom }}</span>
-        </div>
+        <center><img class="photo_profil" src="{{ asset('img/' ~ app.user.image) }}" alt="profil"/></center>
+        <table>
+            <tr><td>Nom :</td><td>{{ app.user.nom }}</td></tr>
+            <tr><td>Prénom :</td><td>{{ app.user.prenom }}</td></tr>
+            <tr><td>Email :</td><td>{{ app.user.mail }}</td></tr>
+            <tr><td>Campus :</td><td>{{ app.user.campus.nom }}</td></tr>
+        </table>
     </div>
 {% endblock %}

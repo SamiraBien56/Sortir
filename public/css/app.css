@@ -162,8 +162,8 @@ input {
 }
 
 .photo_profil{
-    width: 150px;
-    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .admin_controller{
@@ -215,4 +215,10 @@ input {
 #organisateur, #inscrit, #nonInscrit, #dateHeureDebut {
     display: inline;
     float: right;
+}
+
+td {
+    background: rgba(0, 0, 0, 0.1);
+    border: 10px solid rgba(0, 0, 0, 0.0);
+    font-family: Bahnschrift;
 }
