@@ -11,26 +11,29 @@
     {% endfor %}
     <div class="col-xs4">
         <h1>Sortie: {{ sortie.nom }} </h1>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-5">
+            <div> Nom de la sortie : {{ sortie.nom }}</div>
+            <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date("Y-m-d") }}</div>
+            <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date("Y-m-d")  }}</div>
+            <div> Nombre de places : {{ sortie.nbInsriptionsMax }}</div>
+            <div> Durée : {{ sortie.duree|date("Y-m-d")  }}</div>
+            <div> Description et infos : {{ sortie.infosSortie }}</div>
+        </div>
+        <hr>
+        <div class="col-12 col-lg-5">
+            <div> Campus : {{ sortie.campus.nom }}</div>
+            <div> Lieu : {{ sortie.lieu.nom }}</div>
+            <div> Rue : {{ sortie.lieu.rue }}</div>
+            <div> Code Postal : {{ sortie.ville.codePostal }}</div>
+            <div> Latitude: {{ sortie.lieu.latitude }}</div>
+            <div> Longitude: {{ sortie.lieu.longitude }}</div>
+        </div>
     </div>
     <div>
-        <div> Nom de la sortie : {{ sortie.nom }}</div>
-        <div> Date et heure de la sortie : {{ sortie.dateHeureDebut|date("Y-m-d") }}</div>
-        <div> Date limite d'inscription : {{ sortie.dateLimiteInscription|date("Y-m-d")  }}</div>
-        <div> Nombre de places : {{ sortie.nbInsriptionsMax }}</div>
-        <div> Durée : {{ sortie.duree|date("Y-m-d")  }}</div>
-        <div> Description et infos : {{ sortie.infosSortie }}</div>
-    </div>
-    <div>
-        <div> Campus : {{"#"}}</div>
-        <div> Lieu : {{ "#" }}</div>
-        <div> Rue : {{ "#" }}</div>
-        <div> Code Postal : {{ "#" }}</div>
-        <div> Latitude: {{ "#" }}</div>
-        <div> Longitude: {{ "#" }}</div>
-
-
-    </div>
-    <div>
+        <hr>
         <label class="col-xs1">Liste des participant inscrits:</label>
         <table class="table table-hover">
             <thead>
