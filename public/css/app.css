@@ -40,6 +40,9 @@ body > .container {
     min-height: 100vh;
 }
 header{
+
+}
+header{
     background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)),#6A2CD3;
     position: sticky;
     top:0;
