@@ -24,8 +24,6 @@ class SortieRepository extends ServiceEntityRepository
      */
     public function search($idUser, $idCampus, $nom, $dateMin, $dateMax, $organisateur, $dateHeureDebut, $inscrit, $nonInscrit)
     {
-        //$dateM = new \DateTime(implode('-', $dateMin));
-        //$dateMa = new \DateTime(implode('-', $dateMax));
 
         $jour = new \DateTime();
         $query = $this
@@ -33,7 +31,12 @@ class SortieRepository extends ServiceEntityRepository
             ->select('sortie')
             ->leftJoin('sortie.campus', 'campus')
             ->leftJoin('sortie.organisateur', 'organisateur')
-            ->leftJoin('sortie.participants', 'participant');
+            ->leftJoin('sortie.participants', 'participant')
+            ->leftJoin('sortie.etat', 'etat')
+            ->andWhere('etat.id=2 OR etat.id=3 OR etat.id=4 OR etat.id=5
+            OR organisateur.id LIKE :idUser')
+            ->setParameter('idUser', $idUser);
+        ;
         if ($nom != null) {
             $query = $query
                 ->andWhere('sortie.nom LIKE :nom')
@@ -69,12 +72,12 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('participant.id LIKE :idUser')
                 ->setParameter('idUser', $idUser);
         }
-        /*if ($nonInscrit != null) {
+        if ($nonInscrit != null) {
             $query = $query
-                ->andWhere(':idUser NOT IN participant.id')
+                ->andWhere(':idUser NOT MEMBER OF sortie.participants')
                 ->setParameter('idUser', $idUser)
             ;
-        }*/
+        }
         return $query->getQuery()->getResult();
     }
 }

@@ -62,10 +62,6 @@ class MainController extends AbstractController
                 } else {
                     $nonInscrit = null;
                 }
-                //dd($req);
-                //$listAllSorties = $sortieManager->getSortiesByFilter($req["campus"], $req["nom"], $req["dateMin"], $req["dateMax"]);
-                //$listAllSorties = $sortieRepository->findSearch($request);
-                //$listAllSorties = $sortieManager->search($req["campus"], $req["nom"], $req["dateMin"], $req["dateMax"], $req["organisateur"], $req["dateHeureDebut"]);
                 $listAllSorties = $sortieRepository->search($userId, $req["campus"], $req["nom"], $req["dateMin"], $req["dateMax"], $organisateur, $dateHeureDebut, $inscrit, $nonInscrit);
             } else {
                 if ($this->getUser() != null) {
@@ -81,12 +77,9 @@ class MainController extends AbstractController
                 'listAllSorties' => $listAllSorties,
                 'filterForm' => $filterForm->createView(),
                 'inscriptions' => $inscriptions,
-
-                //'maj' => $maj
             ]);
         }else{
             return $this->redirectToRoute('app_login');
         }
-
-
-}}
+    }
+}
