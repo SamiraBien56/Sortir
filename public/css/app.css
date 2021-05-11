@@ -8,8 +8,7 @@ body {
     font-family: 'Zen Dots', serif;
     background-size: cover;
     background-position: center center;
-   background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("randonneee.jpg");
-
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("randonneee.jpg");
 
 }
 .container {
@@ -40,6 +39,11 @@ body > .container {
     flex-direction: column;
     min-height: 100vh;
 }
+header{
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)),#6A2CD3;
+    position: sticky;
+    top:0;
+}
 
 header img {
     height: 70px;
@@ -57,6 +61,14 @@ nav ul {
 nav li {
     display: flex;
     margin-right: 1rem;
+}
+.footer_base{
+
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding-top:50px;
+    height:50px;
 }
 
 
@@ -220,4 +232,3 @@ input {
 .tr_participant{
     text-align: center;
 }
-

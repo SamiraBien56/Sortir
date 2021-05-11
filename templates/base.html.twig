@@ -21,10 +21,17 @@
     <link rel="icon" href="{{ asset('img/logo.png')}}">
 </head>
 <body>
-<header>
-    <a href="{{ path('main_home') }}"><img src="{{ asset('img/logo.png') }}"></a>
-    {% include('nav/nav.html.twig') %}
+<header id="header">
+    <div class="div_img"><a href="{{ path('main_home') }}"><img src="{{ asset('img/logo.png') }}"></a></div>
+    <div class="div_nav">{% include('nav/nav.html.twig') %}</div>
+    <div class="div_info">
+       Date du jour : {{ "now"|date("d/m/Y") }}<br>
+            {% if app.user %}
+                Participant : {{ app.user.pseudo }}
+            {% endif %}
+    </div>
 </header>
+
 {# read and display all flash message #}
 {%  for label, messages in app.flashes%}
     {% for message in messages %}
@@ -37,9 +44,10 @@
 
 {%  endblock body %}
 
-<footer>
+<footer class="footer_base">
     <div style="text-align: center">&copy; {{ "now"|date('h:i:s-d/m/Y') }} Sortir.com!<br>
-    Symfony Project by Samira, Lisa and Antoine, realise with PHPStrom, PHPMYAdmin and some bundle</div>
+    Symfony Project by Samira, Lisa and Antoine, realise with PHPStrom, PHPMYAdmin and some bundle <br>
+    Copyright &copy; Sorir.com 2021, All Right Reserved</div>
 </footer>
 
 </body>
