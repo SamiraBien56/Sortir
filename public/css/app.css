@@ -204,6 +204,7 @@ input {
     justify-content: space-around;
 
 }
+
 .rechercheFiltre{
     float: left;
     display: inline-block;
@@ -211,6 +212,16 @@ input {
     justify-content: space-around;
 
 }
+
+.tab{
+    display: inline-flex;
+    justify-content: flex-start;
+    background: rgba(0, 0, 0, 0.1);
+    border: 10px solid rgba(0, 0, 0, 0.0);
+    font-family: Bahnschrift;
+    width: 120px;
+}
+
 
 #organisateur, #inscrit, #nonInscrit, #dateHeureDebut {
     display: inline;

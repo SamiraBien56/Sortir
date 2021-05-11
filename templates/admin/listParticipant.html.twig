@@ -1,45 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div>
+
         <h1>Liste des Participant</h1>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Pseudo</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Mail</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for participant in listParticipants %}
 
+    <div class="tab">ID</div>
+    <div class="tab">Pseudo</div>
+    <div class="tab">Nom</div>
+    <div class="tab">Mail</div>
+    <div class="tab">Actions</div>
+    <br>
+    <div></div>
 
-            <tr>
-                <td>{{ participant.id}}</td>
-                <td>{{ participant.pseudo }}</td>
-                <td>{{ participant.nom }}</td>
-                <td>{{ participant.mail }}</td>
+    {% for participant in listParticipants %}
+        <div class="tab">{{ participant.id}}</div>
+        <div class="tab">{{ participant.pseudo}}</div>
+        <div class="tab">{{ participant.nom}}</div>
+        <div class="tab">{{ participant.mail}}</div>
+        <div class="tab">{% if participant.actif == 1 %}
+                <a href="{{ path('admin_desactiverParticipant',{'id': participant.id})}}" title="desactiver ">Désactiver</a> -
+                    <a href="{{ path('admin_admin_supprimerParticipant',{'id': participant.id})}}"title="supprimer ">Supprimer</a>
+            {% else %}
+                <a href="{{ path('admin_reactiverParticipant',{'id': participant.id})}}" title="reactiver ">Réactiver</a> -
+                    <a href="{{ path('admin_admin_supprimerParticipant',{'id': participant.id})}}"title="supprimer ">Supprimer</a>
 
-                </td>
-                <td>
-                    {% if participant.actif == 1 %}
-                 <div><a href="{{ path('admin_desactiverParticipant',{'id': participant.id})}}" title="desactiver ">Désactiver</a> -
-                        <a href="{{ path('admin_admin_supprimerParticipant',{'id': participant.id})}}"title="supprimer ">Supprimer</a></div>
-                    {% else %}
-                        <div><a href="{{ path('admin_reactiverParticipant',{'id': participant.id})}}" title="reactiver ">Réactiver</a> -
-                            <a href="{{ path('admin_admin_supprimerParticipant',{'id': participant.id})}}"title="supprimer ">Supprimer</a></div>
-
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    </div>
+            {% endif %}
+        </div>
+        <br>
+        <div></div>
+    {% endfor %}
 {% endblock %}
 
 
