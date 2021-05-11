@@ -5,12 +5,12 @@
 
 {% block body %}
     <div class="grix xs4 container">
-        <center><img class="photo_profil" src="{{ asset('img/' ~ app.user.image) }}" alt="profil"/></center>
+        <center><img class="photo_profil" src="{{ asset('img/' ~ profil.image) }}" alt="profil"/></center>
         <table>
-            <tr><td>Nom :</td><td>{{ app.user.nom }}</td></tr>
-            <tr><td>Prénom :</td><td>{{ app.user.prenom }}</td></tr>
-            <tr><td>Email :</td><td>{{ app.user.mail }}</td></tr>
-            <tr><td>Campus :</td><td>{{ app.user.campus.nom }}</td></tr>
+            <tr><td>Nom :</td><td>{{ profil.nom }}</td></tr>
+            <tr><td>Prénom :</td><td>{{ profil.prenom }}</td></tr>
+            <tr><td>Email :</td><td>{{ profil.mail }}</td></tr>
+            <tr><td>Campus :</td><td>{{ profil.campus.nom }}</td></tr>
         </table>
     </div>
 {% endblock %}
