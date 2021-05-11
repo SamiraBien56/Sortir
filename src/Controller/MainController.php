@@ -81,6 +81,5 @@ class MainController extends AbstractController
         }else{
             return $this->redirectToRoute('app_login');
         }
-
-
-}}
+    }
+}
