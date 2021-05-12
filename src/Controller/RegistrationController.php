@@ -27,7 +27,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
 
             $images = $form->get('image')->getData();
             $fichier = md5(uniqid()).'.'.$images->guessExtension();
@@ -36,20 +35,6 @@ class RegistrationController extends AbstractController
             $images->move(
                 $this->getParameter('images_directory'),
                 $fichier);
-            /*foreach ($images as $image){
-                // on génére un nouveau nom de fichier
-                $fichier = md5(uniqid()).'.'.$image->guessExtension();
-                //dd($fichier);
-
-                //on copie le fichier dans img
-                $image->move(
-                  $this->getParameter('images_directory'),
-                    $fichier
-                );
-                // on stock en bdd
-                $img = $this->getUser()->setImage('coucou');
-                $user->setImage($img);
-            } */
 
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -61,7 +46,6 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

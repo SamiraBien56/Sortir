@@ -21,7 +21,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/create", name = "sortie_create")
      */
-    public function createSortie(request $request, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager, EtatRepository $etatRepository, VilleRepository $villeRepository): Response
+    public function createSortie(request $request, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager, EtatRepository $etatRepository): Response
     {
         $user = $this->getUser()->getId();
         $organisateur = $participantRepository->find($user);
@@ -38,7 +38,7 @@ class SortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La sortie a bien été enregistrer Bien joué!!!');
+            $this->addFlash('success', 'La sortie a bien été enregistrée');
             return $this-> redirectToRoute('main_home', ['id'=> $sortie->getId()]);
         }
 
@@ -69,7 +69,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/modifier/{id}", name = "sortie_modifier")
      */
-    public function modifier(int $id, Request $request, SortieRepository $sortieRepository, SortieManager $sortieManager, EntityManagerInterface $entityManager): Response
+    public function modifier(int $id, Request $request, SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
         $sortie = $sortieRepository->find($id);
         $user = $this->getUser();
@@ -81,17 +81,15 @@ class SortieController extends AbstractController
         if($sortieForm->isSubmitted() && $sortieForm->isValid()){
             $entityManager->flush();
 
-            $this->addFlash('success', 'La sortie a bien été modifiée !!!');
+            $this->addFlash('success', 'La sortie a bien été modifiée !');
             return $this-> redirectToRoute('main_home');
         }
-
 
         return $this->render('sortie/modifier.html.twig', [
             "sortie"=> $sortie,
             "user"=>$user,
             "sortieForm" => $sortieForm->createView()
         ]);
-
     }
 
     /**
@@ -130,8 +128,6 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('main_home');
     }
 
-
-
     /**
      * @Route("/sortie/sinscrire/{id}", name = "sortie_sinscrire")
      */
@@ -143,8 +139,8 @@ class SortieController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('main_home');
-
     }
+
     /**
      * @Route("/sortie/sedesister/{id}", name = "sortie_sedesister")
      */
@@ -156,7 +152,5 @@ class SortieController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('main_home');
-
     }
-
 }

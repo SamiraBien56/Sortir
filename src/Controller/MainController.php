@@ -22,7 +22,7 @@ class MainController extends AbstractController
      * @Route ("/", name="main_home")
      *
      */
-    public function home(SortieManager $sortieManager, SortieRepository $sortieRepository, UserManager $userManager, Request $request,
+    public function home(SortieManager $sortieManager, SortieRepository $sortieRepository, Request $request,
                          ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
     {
         if ($this->getUser() != null) {

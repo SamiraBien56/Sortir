@@ -2,7 +2,6 @@
 
 namespace App\utils;
 
-use App\Entity\Sortie;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,8 +27,6 @@ class SortieManager
 
     public function getSortiesByCampus($idCampus, $idUser)
     {
-        $monthAfter = new \DateTime('+5 weeks');
-        $monthAgo = new \DateTime('1 month ago');
         $sortiesByCampus = $this->entityManager->createQuery(
             'SELECT sortie FROM App\Entity\Sortie sortie
             LEFT JOIN sortie.campus campus
@@ -45,28 +42,6 @@ class SortieManager
 
         ;
         $allSorties = $sortiesByCampus->getResult();
-        return $allSorties;
-    }
-
-    public function getSortiesByFilter($idCampus, $nom, $dateMin, $dateMax)
-    {
-            $dateM = new \DateTime(implode('-', $dateMin));
-            $dateMa = new \DateTime(implode('-', $dateMax));
-
-        $sortiesFilter = $this->entityManager->createQuery(
-            'SELECT sortie FROM App\Entity\Sortie sortie
-            LEFT JOIN sortie.campus campus
-            WHERE campus.id LIKE :idCampus 
-            AND sortie.nom LIKE :nom 
-            AND sortie.dateHeureDebut BETWEEN :dateMin  AND :dateMax'
-        )
-            ->setParameter('idCampus', $idCampus)
-            ->setParameter('nom', "%{$nom}%")
-            ->setParameter('dateMin', $dateM->format('Y-d-m'))
-            ->setParameter('dateMax', $dateMa->format('Y-d-m'))
-        ;
-
-        $allSorties = $sortiesFilter->getResult();
         return $allSorties;
     }
 
@@ -100,15 +75,5 @@ class SortieManager
             $this->entityManager->flush();
         }
     }
-
-
-
-    /*public function sinscrire($idSortie, $idParticipant){
-        $inscription =$this->entityManager->createQuery(
-            'INSERT INTO `sortie_participant`(`sortie_id`, `participant_id`)
-                '
-        )
-            ->setParameter('idSortie', $idSortie)
-            ->setParameter('idParticipant', $idParticipant);*/
 
 }

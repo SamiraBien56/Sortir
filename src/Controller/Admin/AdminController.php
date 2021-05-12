@@ -27,9 +27,7 @@ class AdminController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        return $this->render('admin/index.html.twig');
     }
 
     /**
@@ -86,7 +84,6 @@ class AdminController extends AbstractController
         $participant->setActif(1);
         $participant->setRoles(["ROLE_USER"]);
 
-
         //$participant->setImage('$fichier');
         $participant->setPassword(
             $passwordEncoder->encodePassword(
@@ -102,8 +99,6 @@ class AdminController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Participant inscrit!');
             return $this->redirectToRoute('admin_dashboard');
-
-
         }
 
         return $this->render('admin/creeParticipant.html.twig', [
@@ -116,7 +111,7 @@ class AdminController extends AbstractController
      * list des participant
      * @Route("/listParticipant", name="admin_listParticipant")
      */
-    public function selectParticipant(ParticipantRepository $participantRepository,EntityManagerInterface $entityManager){
+    public function selectParticipant(ParticipantRepository $participantRepository){
         $listAllParticipant = $participantRepository->findAll();
         return $this->render('admin/listParticipant.html.twig',[
             'listParticipants'=>$listAllParticipant
